@@ -1,9 +1,15 @@
 package io.bluebeaker.mteenoughitems.jei;
 
+import forestry.Forestry;
+import forestry.energy.ModuleEnergy;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
+import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
+import io.bluebeaker.mteenoughitems.jei.generator.BiogasEngineCategory;
+import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
@@ -18,6 +24,11 @@ public class MTEEIPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+    if(ModChecker.Forestry.isLoaded()){
+      if(MTEEnoughItemsConfig.forestry.biogas_engine) {
+        registry.addRecipeCategories(new BiogasEngineCategory(jeiHelpers.getGuiHelper()));
+      }
+    }
   }
 
   @Override
@@ -26,6 +37,14 @@ public class MTEEIPlugin implements IModPlugin {
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 
     MTEEnoughItems.getLogger().info("Started loading recipes...");
+
+    if(ModChecker.Forestry.isLoaded()){
+      if(MTEEnoughItemsConfig.forestry.biogas_engine){
+        registry.addRecipes(BiogasEngineCategory.getRecipes(jeiHelpers),BiogasEngineCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ModuleEnergy.getBlocks().biogasEngine),BiogasEngineCategory.UID);
+      }
+    }
+
     MTEEnoughItems.getLogger().info("Loaded all recipes!");
   }
 

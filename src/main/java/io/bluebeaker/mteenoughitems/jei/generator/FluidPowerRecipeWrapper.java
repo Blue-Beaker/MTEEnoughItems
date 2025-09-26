@@ -51,6 +51,6 @@ public class FluidPowerRecipeWrapper implements IRecipeWrapper {
     }
 
     public String getPowerUnit(){
-        return EnergyUnit.EU.name;
+        return EnergyUnit.RF.name;
     }
 }
