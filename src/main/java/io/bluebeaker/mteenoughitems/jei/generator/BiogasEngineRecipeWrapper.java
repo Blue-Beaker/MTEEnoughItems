@@ -14,8 +14,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.bluebeaker.mteenoughitems.jei.generator.BiogasEngineCategory.SLOT_Y;
-
 public class BiogasEngineRecipeWrapper extends FluidPowerRecipeWrapper{
     public static final FluidStack LAVA = new FluidStack(FluidRegistry.LAVA, 1000);
     public final int dissipationMultiplier;
@@ -34,25 +32,12 @@ public class BiogasEngineRecipeWrapper extends FluidPowerRecipeWrapper{
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        int xPos = 8;
-        int yPos = 4 ;
+        int xPos = 16;
+        int yPos = recipeHeight/2-minecraft.fontRenderer.FONT_HEIGHT-1 ;
 
         RenderUtils.drawTextAlignedLeft(this.power+getPowerUnit()+"/t", xPos, yPos, Color.gray.getRGB());
         yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;
 
         RenderUtils.drawTextAlignedLeft(this.energy+getPowerUnit()+"/mB", xPos, yPos, Color.gray.getRGB());
-
-        yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;
-
-        int minHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY - this.dissipationMultiplier;
-        int maxHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY * 3 - this.dissipationMultiplier*2;
-
-//        RenderUtils.drawTextAlignedRight(minHeatGain +"-"+ maxHeatGain +"heat/tick", xPos, yPos, Color.gray.getRGB());
-
-        int minLoss = maxHeatGain<0 ? -Constants.ENGINE_HEAT_VALUE_LAVA/maxHeatGain : 0;
-        int maxLoss = maxHeatGain<0 ? -Constants.ENGINE_HEAT_VALUE_LAVA/minHeatGain : 0;
-        if(minLoss>0 || maxLoss>0){
-            RenderUtils.drawTextAlignedRight(minLoss+"-"+maxLoss+"t/mb",recipeWidth-8,SLOT_Y+10,Color.gray.getRGB());
-        }
     }
 }

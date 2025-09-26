@@ -1,1 +1,3 @@
 category.mteenoughitems.forestry.biogas_engine.name=Biogas Engine
+category.mteenoughitems.forestry.biogas_engine.lava_startup=Only consumed when heating up
+category.mteenoughitems.forestry.biogas_engine.lava_constant=Consumed constantly
