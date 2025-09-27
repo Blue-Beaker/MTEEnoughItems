@@ -5,6 +5,7 @@ import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidHeatConversionCategory;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidHeatConversionRecipe;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
+import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -43,6 +44,11 @@ public class BoilerCategory extends FluidHeatConversionCategory<BoilerRecipe> {
 
         ItemBlock item = RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item();
         this.icon = item==null?null:guiHelper.createDrawableIngredient(new ItemStack(item));
+    }
+
+    @Override
+    public String getModName() {
+        return ModChecker.Railcraft.name;
     }
 
     @Override

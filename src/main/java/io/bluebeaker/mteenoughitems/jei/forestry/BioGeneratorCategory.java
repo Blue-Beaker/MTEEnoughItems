@@ -6,6 +6,7 @@ import forestry.energy.ModuleEnergy;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
+import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -23,6 +24,11 @@ public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorR
         super(guiHelper);
 
         this.icon = guiHelper.createDrawableIngredient(new ItemStack(PluginIC2.getBlocks().generator));
+    }
+
+    @Override
+    public String getModName() {
+        return ModChecker.Forestry.name;
     }
 
     @Override

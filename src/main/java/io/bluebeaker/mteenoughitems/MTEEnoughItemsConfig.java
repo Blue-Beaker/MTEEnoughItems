@@ -10,6 +10,9 @@ public class MTEEnoughItemsConfig {
     public static Forestry forestry = new Forestry();
     public static class Forestry{
         @Config.RequiresMcRestart
+        @LangKey(Categories.Forestry.PEAT_ENGINE)
+        public boolean peat_engine = true;
+        @Config.RequiresMcRestart
         @LangKey(Categories.Forestry.BIOGAS_ENGINE)
         public boolean biogas_engine = true;
         @Config.RequiresMcRestart

@@ -50,11 +50,6 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
     }
 
     @Override
-    public String getModName() {
-        return MTEEnoughItems.MODID;
-    }
-
-    @Override
     public IDrawable getBackground() {
         return this.background;
     }

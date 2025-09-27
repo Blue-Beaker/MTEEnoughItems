@@ -2,12 +2,14 @@ package io.bluebeaker.mteenoughitems.jei;
 
 import forestry.energy.ModuleEnergy;
 import forestry.energy.gui.GuiEngineBiogas;
+import forestry.energy.gui.GuiEnginePeat;
 import forestry.energy.gui.GuiGenerator;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
+import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
@@ -38,6 +40,9 @@ public class MTEEIPlugin implements IModPlugin {
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
     if(ModChecker.Forestry.isLoaded()){
+      if(MTEEnoughItemsConfig.forestry.peat_engine) {
+        registry.addRecipeCategories(new PeatEngineCategory(jeiHelpers.getGuiHelper()));
+      }
       if(MTEEnoughItemsConfig.forestry.biogas_engine) {
         registry.addRecipeCategories(new BiogasEngineCategory(jeiHelpers.getGuiHelper()));
       }
@@ -63,6 +68,10 @@ public class MTEEIPlugin implements IModPlugin {
     MTEEnoughItems.getLogger().info("Started loading recipes...");
 
     if(ModChecker.Forestry.isLoaded()){
+      if(MTEEnoughItemsConfig.forestry.peat_engine){
+        registry.addRecipes(PeatEngineCategory.getRecipes(jeiHelpers),PeatEngineCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ModuleEnergy.getBlocks().peatEngine),PeatEngineCategory.UID);
+      }
       if(MTEEnoughItemsConfig.forestry.biogas_engine){
         registry.addRecipes(BiogasEngineCategory.getRecipes(jeiHelpers),BiogasEngineCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(ModuleEnergy.getBlocks().biogasEngine),BiogasEngineCategory.UID);
@@ -72,8 +81,10 @@ public class MTEEIPlugin implements IModPlugin {
         registry.addRecipes(BioGeneratorCategory.getRecipes(jeiHelpers),BioGeneratorCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(PluginIC2.getBlocks().generator),BioGeneratorCategory.UID);
       }
+
       registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
       registry.addRecipeClickArea(GuiGenerator.class,68,38,40,18,BioGeneratorCategory.UID);
+      registry.addRecipeClickArea(GuiEnginePeat.class,45,27,14,14, PeatEngineCategory.UID);
     }
     if(ModChecker.Railcraft.isLoaded()){
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox){

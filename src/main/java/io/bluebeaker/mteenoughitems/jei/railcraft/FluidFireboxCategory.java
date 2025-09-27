@@ -3,6 +3,7 @@ package io.bluebeaker.mteenoughitems.jei.railcraft;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
+import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -37,6 +38,11 @@ public class FluidFireboxCategory extends FluidPowerRecipeCategory<FluidFireboxW
 
         ItemBlock item = RailcraftBlocks.BOILER_FIREBOX_FLUID.item();
         this.icon = item==null?null:guiHelper.createDrawableIngredient(new ItemStack(item));
+    }
+
+    @Override
+    public String getModName() {
+        return ModChecker.Railcraft.name;
     }
 
     @Override

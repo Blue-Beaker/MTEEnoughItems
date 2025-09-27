@@ -5,8 +5,10 @@ import forestry.api.fuels.FuelManager;
 import forestry.core.config.Constants;
 import forestry.energy.ModuleEnergy;
 import io.bluebeaker.mteenoughitems.Categories;
+import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
+import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.*;
@@ -37,6 +39,11 @@ public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineR
         this.heatBar = guiHelper.drawableBuilder(GUI_PATH, 176, 60, 4, 16).buildAnimated(200, IDrawableAnimated.StartDirection.BOTTOM, false);
 
         this.icon = guiHelper.createDrawableIngredient(new ItemStack(ModuleEnergy.getBlocks().biogasEngine));
+    }
+
+    @Override
+    public String getModName() {
+        return ModChecker.Forestry.name;
     }
 
     @Override
