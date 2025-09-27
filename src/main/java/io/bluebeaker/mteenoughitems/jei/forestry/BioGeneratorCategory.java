@@ -2,12 +2,17 @@ package io.bluebeaker.mteenoughitems.jei.forestry;
 
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.GeneratorFuel;
+import forestry.energy.ModuleEnergy;
+import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.gui.IDrawable;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +21,8 @@ public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorR
 
     public BioGeneratorCategory(IGuiHelper guiHelper) {
         super(guiHelper);
+
+        this.icon = guiHelper.createDrawableIngredient(new ItemStack(PluginIC2.getBlocks().generator));
     }
 
     @Override
@@ -26,6 +33,12 @@ public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorR
     @Override
     public String getUid() {
         return UID;
+    }
+
+    @Nullable
+    @Override
+    public IDrawable getIcon() {
+        return icon;
     }
 
     public static List<BioGeneratorRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers){

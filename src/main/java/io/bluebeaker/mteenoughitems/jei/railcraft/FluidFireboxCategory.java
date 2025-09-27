@@ -29,14 +29,13 @@ public class FluidFireboxCategory extends FluidPowerRecipeCategory<FluidFireboxW
     protected final IDrawableAnimated fire;
     public static final String UID = Categories.Railcraft.FLUID_FIREBOX_UID;
     public static final ResourceLocation GUI_PATH = new ResourceLocation("railcraft","textures/gui/gui_boiler_liquid.png");
-    protected final IDrawable icon;
 
     public FluidFireboxCategory(IGuiHelper guiHelper) {
         super(guiHelper);
         this.bgFire = guiHelper.createDrawable(GUI_PATH, 62, 38, 14, 14);
         this.fire = guiHelper.drawableBuilder(GUI_PATH, 176, 47, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true);
 
-        ItemBlock item = RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item();
+        ItemBlock item = RailcraftBlocks.BOILER_FIREBOX_FLUID.item();
         this.icon = item==null?null:guiHelper.createDrawableIngredient(new ItemStack(item));
     }
 
@@ -48,12 +47,6 @@ public class FluidFireboxCategory extends FluidPowerRecipeCategory<FluidFireboxW
     @Override
     public String getUid() {
         return UID;
-    }
-
-    @Nullable
-    @Override
-    public IDrawable getIcon() {
-        return icon;
     }
 
     @Override

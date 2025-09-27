@@ -3,6 +3,7 @@ package io.bluebeaker.mteenoughitems.jei.forestry;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.core.config.Constants;
+import forestry.energy.ModuleEnergy;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
@@ -12,10 +13,12 @@ import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,8 @@ public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineR
         super(guiHelper);
         this.bgHeatBar = guiHelper.createDrawable(GUI_PATH, 53, 46, 4, 18);
         this.heatBar = guiHelper.drawableBuilder(GUI_PATH, 176, 60, 4, 16).buildAnimated(200, IDrawableAnimated.StartDirection.BOTTOM, false);
+
+        this.icon = guiHelper.createDrawableIngredient(new ItemStack(ModuleEnergy.getBlocks().biogasEngine));
     }
 
     @Override

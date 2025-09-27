@@ -12,8 +12,11 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import mezz.jei.util.Translator;
 
+import javax.annotation.Nullable;
+
 public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 
+    protected IDrawable icon = null;
     private final IDrawable background;
     private final IDrawable slotBackground;
     private final String localizedName;
@@ -31,6 +34,12 @@ public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements
         this.localizedName = Translator.translateToLocal(this.getTranslationKey());
         this.GUI_WIDTH = width;
         this.GUI_HEIGHT = height;
+    }
+
+    @Nullable
+    @Override
+    public IDrawable getIcon() {
+        return icon;
     }
 
     public abstract String getTranslationKey();

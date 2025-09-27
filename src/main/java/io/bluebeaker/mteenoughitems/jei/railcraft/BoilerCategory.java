@@ -32,7 +32,7 @@ import java.util.Map;
 public class BoilerCategory extends FluidHeatConversionCategory<BoilerRecipe> {
     protected final IDrawableStatic bgFire;
     protected final IDrawableAnimated fire;
-    protected final IDrawable icon;
+
     public static final String UID = Categories.Railcraft.BOILER_UID;
     public static final ResourceLocation GUI_PATH = new ResourceLocation("railcraft","textures/gui/gui_boiler_liquid.png");
 
@@ -53,12 +53,6 @@ public class BoilerCategory extends FluidHeatConversionCategory<BoilerRecipe> {
     @Override
     public String getUid() {
         return UID;
-    }
-
-    @Nullable
-    @Override
-    public IDrawable getIcon() {
-        return icon;
     }
 
     public static List<BoilerRecipe> getRecipes(IJeiHelpers jeiHelpers){
