@@ -2,3 +2,5 @@ category.mteenoughitems.forestry.biogas_engine.name=Biogas Engine
 category.mteenoughitems.forestry.biogas_engine.lava_startup=Only consumed when heating up
 category.mteenoughitems.forestry.biogas_engine.lava_constant=Consumed constantly
 category.mteenoughitems.forestry.biogas_generator.name=Bio Generator
+category.mteenoughitems.railcraft.boiler.name=Steam Boiler
+category.mteenoughitems.railcraft.fluid_firebox.name=Fluid Fuel

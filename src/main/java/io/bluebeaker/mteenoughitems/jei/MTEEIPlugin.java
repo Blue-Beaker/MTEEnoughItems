@@ -17,6 +17,8 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mods.railcraft.client.gui.GuiBoilerFluid;
 import mods.railcraft.client.gui.GuiBoilerSolid;
 import mods.railcraft.common.blocks.RailcraftBlocks;
+import mods.railcraft.common.carts.RailcraftCarts;
+import mods.railcraft.common.items.RailcraftItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -85,6 +87,7 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
 
       addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);
       addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
       addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
       addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
