@@ -5,15 +5,20 @@ import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mods.railcraft.api.fuel.FluidFuelManager;
+import mods.railcraft.common.blocks.RailcraftBlocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +27,33 @@ import java.util.Map;
 public class FluidFireboxCategory extends FluidPowerRecipeCategory<FluidFireboxWrapper> {
     protected final IDrawableStatic bgFire;
     protected final IDrawableAnimated fire;
-    public static final String UID = Categories.Railcraft.BOILER_UID;
+    public static final String UID = Categories.Railcraft.FLUID_FIREBOX_UID;
     public static final ResourceLocation GUI_PATH = new ResourceLocation("railcraft","textures/gui/gui_boiler_liquid.png");
+    protected final IDrawable icon;
 
     public FluidFireboxCategory(IGuiHelper guiHelper) {
         super(guiHelper);
         this.bgFire = guiHelper.createDrawable(GUI_PATH, 62, 38, 14, 14);
         this.fire = guiHelper.drawableBuilder(GUI_PATH, 176, 47, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true);
+
+        ItemBlock item = RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item();
+        this.icon = item==null?null:guiHelper.createDrawableIngredient(new ItemStack(item));
     }
 
     @Override
     public String getTranslationKey() {
-        return Categories.Railcraft.BOILER;
+        return Categories.Railcraft.FLUID_FIREBOX;
     }
 
     @Override
     public String getUid() {
         return UID;
+    }
+
+    @Nullable
+    @Override
+    public IDrawable getIcon() {
+        return icon;
     }
 
     @Override

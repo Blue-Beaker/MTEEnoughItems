@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class FluidHeatConversionCategory extends GenericRecipeCategory<FluidHeatConversionRecipe> {
+public abstract class FluidHeatConversionCategory<T extends FluidHeatConversionRecipe> extends GenericRecipeCategory<T> {
     protected final IDrawableStatic bgArrow;
     protected final IDrawableAnimated arrow;
     public FluidHeatConversionCategory(IGuiHelper guiHelper) {
@@ -33,7 +33,7 @@ public abstract class FluidHeatConversionCategory extends GenericRecipeCategory<
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, FluidHeatConversionRecipe wrapper, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, T wrapper, IIngredients iIngredients) {
         IGuiFluidStackGroup guiFluidStackGroup = recipeLayout.getFluidStacks();
         this.addFluidSlot(guiFluidStackGroup,0,8,GUI_HEIGHT/2-9);
         guiFluidStackGroup.set(0,wrapper.inputStack);

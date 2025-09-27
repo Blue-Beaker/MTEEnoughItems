@@ -8,17 +8,21 @@ import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
+import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mods.railcraft.client.gui.GuiBoilerFluid;
+import mods.railcraft.client.gui.GuiBoilerSolid;
 import mods.railcraft.common.blocks.RailcraftBlocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 
 @JEIPlugin
@@ -43,6 +47,9 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox) {
         registry.addRecipeCategories(new FluidFireboxCategory(jeiHelpers.getGuiHelper()));
       }
+      if(MTEEnoughItemsConfig.railcraft.boiler) {
+        registry.addRecipeCategories(new BoilerCategory(jeiHelpers.getGuiHelper()));
+      }
     }
   }
 
@@ -57,27 +64,40 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.forestry.biogas_engine){
         registry.addRecipes(BiogasEngineCategory.getRecipes(jeiHelpers),BiogasEngineCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(ModuleEnergy.getBlocks().biogasEngine),BiogasEngineCategory.UID);
-        registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
       }
 
       if(MTEEnoughItemsConfig.forestry.bio_generator && ModChecker.IC2.isLoaded()){
         registry.addRecipes(BioGeneratorCategory.getRecipes(jeiHelpers),BioGeneratorCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(PluginIC2.getBlocks().generator),BioGeneratorCategory.UID);
-        registry.addRecipeClickArea(GuiGenerator.class,68,38,40,18,BioGeneratorCategory.UID);
       }
+      registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
+      registry.addRecipeClickArea(GuiGenerator.class,68,38,40,18,BioGeneratorCategory.UID);
     }
     if(ModChecker.Railcraft.isLoaded()){
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox){
         registry.addRecipes(FluidFireboxCategory.getRecipes(jeiHelpers), FluidFireboxCategory.UID);
-        ItemBlock firebox = RailcraftBlocks.BOILER_FIREBOX_FLUID.item();
-        registry.addRecipeClickArea(GuiBoilerFluid.class,62,38,14,14,FluidFireboxCategory.UID);
-        if(firebox!=null)
-          registry.addRecipeCatalyst(new ItemStack(firebox), FluidFireboxCategory.UID);
       }
+      if(MTEEnoughItemsConfig.railcraft.boiler) {
+        registry.addRecipes(BoilerCategory.getRecipes(jeiHelpers), BoilerCategory.UID);
+      }
+
+      registry.addRecipeClickArea(GuiBoilerFluid.class,62,38,14,14,FluidFireboxCategory.UID,BoilerCategory.UID);
+      registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
+
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
     }
 
     MTEEnoughItems.getLogger().info("Loaded all recipes!");
   }
+
+  private static void addItemCatalystIfNotNull(@Nullable Item catalyst, IModRegistry registry, String... uid) {
+    if (catalyst != null)
+      registry.addRecipeCatalyst(new ItemStack(catalyst), uid);
+  }
+
 
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntimeIn) {
