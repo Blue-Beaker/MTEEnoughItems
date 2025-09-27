@@ -10,12 +10,14 @@ import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
+import io.bluebeaker.mteenoughitems.jei.railcraft.BlastFurnaceFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mods.railcraft.client.gui.GuiBlastFurnace;
 import mods.railcraft.client.gui.GuiBoilerFluid;
 import mods.railcraft.client.gui.GuiBoilerSolid;
 import mods.railcraft.common.blocks.RailcraftBlocks;
@@ -57,6 +59,9 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.boiler) {
         registry.addRecipeCategories(new BoilerCategory(jeiHelpers.getGuiHelper()));
       }
+      if(MTEEnoughItemsConfig.railcraft.blast_furnace_fuel) {
+        registry.addRecipeCategories(new BlastFurnaceFuelCategory(jeiHelpers.getGuiHelper()));
+      }
     }
   }
 
@@ -93,9 +98,16 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.boiler) {
         registry.addRecipes(BoilerCategory.getRecipes(jeiHelpers), BoilerCategory.UID);
       }
+      if(MTEEnoughItemsConfig.railcraft.blast_furnace_fuel) {
+        registry.addRecipes(BlastFurnaceFuelCategory.getRecipes(jeiHelpers), BlastFurnaceFuelCategory.UID);
+      }
+
+      registry.addRecipeClickArea(GuiBlastFurnace.class,56,36,14,14,BlastFurnaceFuelCategory.UID);
 
       registry.addRecipeClickArea(GuiBoilerFluid.class,62,38,14,14,FluidFireboxCategory.UID,BoilerCategory.UID);
       registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
+
+      addItemCatalystIfNotNull(RailcraftBlocks.BLAST_FURNACE.item(), registry, BlastFurnaceFuelCategory.UID);
 
       addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
       addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);

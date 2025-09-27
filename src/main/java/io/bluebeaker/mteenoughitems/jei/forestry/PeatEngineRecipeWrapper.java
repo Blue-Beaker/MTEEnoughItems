@@ -27,11 +27,11 @@ public class PeatEngineRecipeWrapper extends FuelRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        int xPos = recipeWidth / 2;
+        int xPos = 30;
         int yPos = recipeHeight / 2 - minecraft.fontRenderer.FONT_HEIGHT * 2;
-        RenderUtils.drawTextAlignedMiddle(this.power + "RF/t", xPos, yPos, Color.gray.getRGB());
+        RenderUtils.drawTextAlignedLeft(this.power + "RF/t", xPos, yPos, Color.gray.getRGB());
         yPos += minecraft.fontRenderer.FONT_HEIGHT + 1;
-        RenderUtils.drawTextAlignedMiddle(this.duration + "ticks", xPos, yPos, Color.gray.getRGB());
+        RenderUtils.drawTextAlignedLeft(this.duration + "ticks", xPos, yPos, Color.gray.getRGB());
 
         RenderUtils.drawTextAlignedRight(this.duration + "/7500", recipeWidth - 6, recipeHeight / 2 + 9, Color.gray.getRGB());
     }

@@ -17,5 +17,11 @@ public class Categories {
 
         public static final String FLUID_FIREBOX_UID = "mteenoughitems.railcraft.fluid_firebox";
         public static final String FLUID_FIREBOX = "category."+ FLUID_FIREBOX_UID +".name";
+
+        public static final String BLAST_FURNACE_FUEL_UID = "mteenoughitems.railcraft.blast_furnace_fuel";
+        public static final String BLAST_FURNACE_FUEL = "category."+BLAST_FURNACE_FUEL_UID+".name";
+
+        public static final String WORLDSPIKE_FUEL_UID = "mteenoughitems.railcraft.worldspike_fuel";
+        public static final String WORLDSPIKE_FUEL = "category."+WORLDSPIKE_FUEL_UID+".name";
     }
 }

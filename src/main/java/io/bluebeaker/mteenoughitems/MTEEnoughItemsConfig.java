@@ -28,5 +28,11 @@ public class MTEEnoughItemsConfig {
         @Config.RequiresMcRestart
         @LangKey(Categories.Railcraft.BOILER)
         public boolean boiler = true;
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Railcraft.BLAST_FURNACE_FUEL)
+        public boolean blast_furnace_fuel = true;
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Railcraft.WORLDSPIKE_FUEL)
+        public boolean worldspike_fuel = true;
     }
 }

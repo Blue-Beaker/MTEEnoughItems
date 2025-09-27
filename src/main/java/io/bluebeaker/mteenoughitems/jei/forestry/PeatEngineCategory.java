@@ -31,7 +31,7 @@ public class PeatEngineCategory extends GenericRecipeCategory<PeatEngineRecipeWr
     public PeatEngineCategory(IGuiHelper guiHelper) {
         super(guiHelper);
         this.bgHeatBar = guiHelper.createDrawable(GUI_PATH, 45, 27, 14, 14);
-        this.heatBar = guiHelper.drawableBuilder(GUI_PATH, 176, 0, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.BOTTOM, false);
+        this.heatBar = guiHelper.drawableBuilder(GUI_PATH, 176, 0, 14, 14).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true);
 
         this.icon = guiHelper.createDrawableIngredient(new ItemStack(ModuleEnergy.getBlocks().peatEngine));
     }
