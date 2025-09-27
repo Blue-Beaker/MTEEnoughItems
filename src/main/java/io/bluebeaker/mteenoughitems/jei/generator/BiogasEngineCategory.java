@@ -5,7 +5,6 @@ import forestry.api.fuels.FuelManager;
 import forestry.core.config.Constants;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
-import io.bluebeaker.mteenoughitems.utils.RenderUtils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.*;
@@ -16,12 +15,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineRecipeWrapper> {
-    public static final String UID = "mteenoughitems.forestry.biogas_engine";
+    public static final String UID = Categories.Forestry.BIOGAS_ENGINE_UID;
     public static final EnergyUnit ENERGY_UNIT = EnergyUnit.RF;
     public final int SLOT_Y = GUI_HEIGHT/2-9;
 
