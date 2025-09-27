@@ -1,9 +1,9 @@
-package io.bluebeaker.mteenoughitems.jei.generator;
+package io.bluebeaker.mteenoughitems.jei.forestry;
 
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.GeneratorFuel;
 import io.bluebeaker.mteenoughitems.Categories;
-import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
+import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import net.minecraftforge.fluids.Fluid;

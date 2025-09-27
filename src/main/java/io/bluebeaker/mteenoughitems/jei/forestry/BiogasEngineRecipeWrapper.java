@@ -1,6 +1,6 @@
-package io.bluebeaker.mteenoughitems.jei.generator;
+package io.bluebeaker.mteenoughitems.jei.forestry;
 
-import forestry.core.config.Constants;
+import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeWrapper;
 import io.bluebeaker.mteenoughitems.utils.RenderUtils;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BiogasEngineRecipeWrapper extends FluidPowerRecipeWrapper{
+public class BiogasEngineRecipeWrapper extends FluidPowerRecipeWrapper {
     public static final FluidStack LAVA = new FluidStack(FluidRegistry.LAVA, 1000);
     public final int dissipationMultiplier;
     public BiogasEngineRecipeWrapper(IJeiHelpers jeiHelpers, Fluid fluid, long power, long energy,int dissipationMultiplier) {

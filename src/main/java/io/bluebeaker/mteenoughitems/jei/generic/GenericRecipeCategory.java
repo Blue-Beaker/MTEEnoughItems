@@ -1,11 +1,7 @@
 package io.bluebeaker.mteenoughitems.jei.generic;
 
-import forestry.api.fuels.FuelManager;
-import forestry.api.fuels.GeneratorFuel;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
-import io.bluebeaker.mteenoughitems.jei.generator.BioGeneratorRecipeWrapper;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -15,11 +11,6 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import mezz.jei.util.Translator;
-import net.minecraftforge.fluids.Fluid;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public abstract class GenericRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
 

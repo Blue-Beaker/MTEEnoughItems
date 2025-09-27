@@ -4,7 +4,9 @@ import net.minecraftforge.fml.common.Loader;
 
 public enum ModChecker {
     Forestry("forestry"),
-    Railcraft("railcraft");
+    Railcraft("railcraft"),
+    IC2("ic2");
+
     ModChecker(String name){
         this.name = name;
     }

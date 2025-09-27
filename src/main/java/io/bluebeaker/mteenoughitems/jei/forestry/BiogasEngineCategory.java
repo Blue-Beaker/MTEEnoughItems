@@ -1,9 +1,10 @@
-package io.bluebeaker.mteenoughitems.jei.generator;
+package io.bluebeaker.mteenoughitems.jei.forestry;
 
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.core.config.Constants;
 import io.bluebeaker.mteenoughitems.Categories;
+import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;

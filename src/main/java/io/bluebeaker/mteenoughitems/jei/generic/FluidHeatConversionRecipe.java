@@ -1,4 +1,4 @@
-package io.bluebeaker.mteenoughitems.jei.liquid_heat;
+package io.bluebeaker.mteenoughitems.jei.generic;
 
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
 import io.bluebeaker.mteenoughitems.utils.RenderUtils;

@@ -1,9 +1,8 @@
-package io.bluebeaker.mteenoughitems.jei.liquid_heat;
+package io.bluebeaker.mteenoughitems.jei.generic;
 
 import ic2.api.recipe.ILiquidAcceptManager;
 import ic2.api.recipe.ILiquidHeatExchangerManager;
 import io.bluebeaker.mteenoughitems.Constants;
-import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableAnimated;

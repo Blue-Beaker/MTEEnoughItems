@@ -1,4 +1,4 @@
-package io.bluebeaker.mteenoughitems.jei.generator;
+package io.bluebeaker.mteenoughitems.jei.generic;
 
 import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
 import io.bluebeaker.mteenoughitems.utils.RenderUtils;

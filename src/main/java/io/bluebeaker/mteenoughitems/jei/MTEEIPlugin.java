@@ -1,16 +1,13 @@
 package io.bluebeaker.mteenoughitems.jei;
 
-import forestry.Forestry;
 import forestry.energy.ModuleEnergy;
 import forestry.energy.gui.GuiEngineBiogas;
 import forestry.energy.gui.GuiGenerator;
-import forestry.plugins.CompatPlugin;
-import forestry.plugins.ForestryCompatPlugins;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
-import io.bluebeaker.mteenoughitems.jei.generator.BioGeneratorCategory;
-import io.bluebeaker.mteenoughitems.jei.generator.BiogasEngineCategory;
+import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
+import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -34,7 +31,7 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.forestry.biogas_engine) {
         registry.addRecipeCategories(new BiogasEngineCategory(jeiHelpers.getGuiHelper()));
       }
-      if(MTEEnoughItemsConfig.forestry.bio_generator) {
+      if(MTEEnoughItemsConfig.forestry.bio_generator && ModChecker.IC2.isLoaded()) {
         registry.addRecipeCategories(new BioGeneratorCategory(jeiHelpers.getGuiHelper()));
       }
     }
@@ -54,7 +51,7 @@ public class MTEEIPlugin implements IModPlugin {
       }
       registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
 
-      if(MTEEnoughItemsConfig.forestry.bio_generator){
+      if(MTEEnoughItemsConfig.forestry.bio_generator && ModChecker.IC2.isLoaded()){
         registry.addRecipes(BioGeneratorCategory.getRecipes(jeiHelpers),BioGeneratorCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(PluginIC2.getBlocks().generator),BioGeneratorCategory.UID);
       }

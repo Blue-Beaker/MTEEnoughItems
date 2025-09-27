@@ -1,7 +1,6 @@
-package io.bluebeaker.mteenoughitems.jei.generator;
+package io.bluebeaker.mteenoughitems.jei.generic;
 
 import io.bluebeaker.mteenoughitems.Constants;
-import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
