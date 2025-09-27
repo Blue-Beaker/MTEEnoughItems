@@ -33,7 +33,7 @@ public class BiogasEngineRecipeWrapper extends FluidPowerRecipeWrapper {
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         int xPos = 16;
-        int yPos = recipeHeight/2-minecraft.fontRenderer.FONT_HEIGHT-1 ;
+        int yPos = recipeHeight/2-minecraft.fontRenderer.FONT_HEIGHT;
 
         RenderUtils.drawTextAlignedLeft(this.power+getPowerUnit()+"/t", xPos, yPos, Color.gray.getRGB());
         yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;

@@ -8,4 +8,11 @@ public class Categories {
         public static final String BIO_GENERATOR_UID = "mteenoughitems.forestry.biogas_generator";
         public static final String BIO_GENERATOR = "category."+BIO_GENERATOR_UID+".name";
     }
+    public static class Railcraft {
+        public static final String BOILER_UID = "mteenoughitems.railcraft.boiler";
+        public static final String BOILER = "category."+BOILER_UID+".name";
+
+        public static final String FLUID_FIREBOX_UID = "mteenoughitems.railcraft.fluid_firebox";
+        public static final String FLUID_FIREBOX = "category."+ FLUID_FIREBOX_UID +".name";
+    }
 }

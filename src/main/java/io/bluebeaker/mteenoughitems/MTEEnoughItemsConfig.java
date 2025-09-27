@@ -16,4 +16,14 @@ public class MTEEnoughItemsConfig {
         @LangKey(Categories.Forestry.BIO_GENERATOR)
         public boolean bio_generator = true;
     }
+    @LangKey("config.mteenoughitems.railcraft.name")
+    public static Railcraft railcraft = new Railcraft();
+    public static class Railcraft{
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Railcraft.FLUID_FIREBOX)
+        public boolean fluid_firebox = true;
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Railcraft.BOILER)
+        public boolean boiler = true;
+    }
 }
