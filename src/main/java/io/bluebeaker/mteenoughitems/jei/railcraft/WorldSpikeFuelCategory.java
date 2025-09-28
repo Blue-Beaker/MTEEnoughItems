@@ -66,21 +66,12 @@ public class WorldSpikeFuelCategory extends GenericRecipeCategory<WorldSpikeFuel
 
     public static List<Wrapper> getRecipes(IJeiHelpers jeiHelpers){
         List<Wrapper> recipes = new ArrayList<>();
-
-        Map<Ingredient, Float> fuelListPersonal = WorldspikeVariant.PERSONAL.getFuelList();
-        Map<Ingredient, Float> fuelListPassive = WorldspikeVariant.PASSIVE.getFuelList();
-        Map<Ingredient, Float> fuelListStandard = WorldspikeVariant.STANDARD.getFuelList();
-
-        for (Ingredient ingredient : fuelListPersonal.keySet()) {
-            recipes.add(new Wrapper(ingredient,fuelListPersonal.get(ingredient),1));
+        for (int i = 1; i < WorldspikeVariant.values().length; i++) {
+            Map<Ingredient, Float> fuelList = WorldspikeVariant.fromId(i).getFuelList();
+            for (Ingredient ingredient : fuelList.keySet()) {
+                recipes.add(new Wrapper(ingredient,fuelList.get(ingredient),1));
+            }
         }
-        for (Ingredient ingredient : fuelListPassive.keySet()) {
-            recipes.add(new Wrapper(ingredient,fuelListPassive.get(ingredient),2));
-        }
-        for (Ingredient ingredient : fuelListStandard.keySet()) {
-            recipes.add(new Wrapper(ingredient,fuelListStandard.get(ingredient),3));
-        }
-
         return recipes;
     }
 
