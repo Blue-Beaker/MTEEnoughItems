@@ -5,6 +5,8 @@ import net.minecraftforge.fml.common.Loader;
 public enum ModChecker {
     Forestry("forestry"),
     Railcraft("railcraft"),
+    ThermalFoundation("thermalfoundation"),
+    ThermalExpansion("thermalexpansion"),
     IC2("ic2");
 
     ModChecker(String name){

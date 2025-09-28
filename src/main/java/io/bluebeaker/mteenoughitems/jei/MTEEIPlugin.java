@@ -14,6 +14,7 @@ import io.bluebeaker.mteenoughitems.jei.railcraft.BlastFurnaceFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.WorldSpikeFuelCategory;
+import io.bluebeaker.mteenoughitems.jei.thermal.FluidConversionCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -45,28 +46,31 @@ public class MTEEIPlugin implements IModPlugin {
     IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
     if(ModChecker.Forestry.isLoaded()){
       if(MTEEnoughItemsConfig.forestry.peat_engine) {
-        registry.addRecipeCategories(new PeatEngineCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new PeatEngineCategory(guiHelper));
       }
       if(MTEEnoughItemsConfig.forestry.biogas_engine) {
-        registry.addRecipeCategories(new BiogasEngineCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new BiogasEngineCategory(guiHelper));
       }
       if(MTEEnoughItemsConfig.forestry.bio_generator && ModChecker.IC2.isLoaded()) {
-        registry.addRecipeCategories(new BioGeneratorCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new BioGeneratorCategory(guiHelper));
       }
     }
     if(ModChecker.Railcraft.isLoaded()){
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox) {
-        registry.addRecipeCategories(new FluidFireboxCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new FluidFireboxCategory(guiHelper));
       }
       if(MTEEnoughItemsConfig.railcraft.boiler) {
-        registry.addRecipeCategories(new BoilerCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new BoilerCategory(guiHelper));
       }
       if(MTEEnoughItemsConfig.railcraft.blast_furnace_fuel) {
-        registry.addRecipeCategories(new BlastFurnaceFuelCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new BlastFurnaceFuelCategory(guiHelper));
       }
       if(MTEEnoughItemsConfig.railcraft.worldspike_fuel) {
-        registry.addRecipeCategories(new WorldSpikeFuelCategory(jeiHelpers.getGuiHelper()));
+        registry.addRecipeCategories(new WorldSpikeFuelCategory(guiHelper));
       }
+    }
+    if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
+      registry.addRecipeCategories(new FluidConversionCategory(guiHelper));
     }
   }
 
@@ -128,6 +132,9 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.worldspike_fuel) {
         registry.addRecipes(WorldSpikeFuelCategory.getRecipes(jeiHelpers), WorldSpikeFuelCategory.UID);
       }
+    }
+    if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
+      registry.addRecipes(FluidConversionCategory.getRecipes(jeiHelpers), FluidConversionCategory.UID);
     }
 
     MTEEnoughItems.getLogger().info("Loaded all recipes!");

@@ -24,4 +24,11 @@ public class Categories {
         public static final String WORLDSPIKE_FUEL_UID = "mteenoughitems.railcraft.worldspike_fuel";
         public static final String WORLDSPIKE_FUEL = "category."+WORLDSPIKE_FUEL_UID+".name";
     }
+    public static class Thermal{
+        public static final String FLUID_CONVERSION_UID = "mteenoughitems.thermal.fluid_conversion";
+        public static final String FLUID_CONVERSION = "category."+FLUID_CONVERSION_UID+".name";
+        
+        public static final String TREE_EXTRACTOR_UID = "mteenoughitems.thermal.tree_extractor";
+        public static final String TREE_EXTRACTOR = "category."+TREE_EXTRACTOR_UID+".name";
+    }
 }

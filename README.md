@@ -6,4 +6,3 @@ JEI addon for some absent recipes in various mods.
 
 TODO:
 - Thermal: Fluid conversion, Arboreal Extractor
-- Galacticraft: Electric Arc Furnace

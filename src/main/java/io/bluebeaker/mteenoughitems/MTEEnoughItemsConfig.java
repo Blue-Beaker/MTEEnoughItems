@@ -35,4 +35,14 @@ public class MTEEnoughItemsConfig {
         @LangKey(Categories.Railcraft.WORLDSPIKE_FUEL)
         public boolean worldspike_fuel = true;
     }
+    @LangKey("config.mteenoughitems.thermal.name")
+    public static Thermal thermal = new Thermal();
+    public static class Thermal{
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Thermal.FLUID_CONVERSION)
+        public boolean fluid_conversion = true;
+        @Config.RequiresMcRestart
+        @LangKey(Categories.Thermal.TREE_EXTRACTOR)
+        public boolean tree_extractor = true;
+    }
 }
