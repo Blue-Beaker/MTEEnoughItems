@@ -13,6 +13,7 @@ import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BlastFurnaceFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
+import io.bluebeaker.mteenoughitems.jei.railcraft.WorldSpikeFuelCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -20,6 +21,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mods.railcraft.client.gui.GuiBlastFurnace;
 import mods.railcraft.client.gui.GuiBoilerFluid;
 import mods.railcraft.client.gui.GuiBoilerSolid;
+import mods.railcraft.client.gui.GuiWorldspike;
 import mods.railcraft.common.blocks.RailcraftBlocks;
 import mods.railcraft.common.carts.RailcraftCarts;
 import mods.railcraft.common.items.RailcraftItems;
@@ -62,6 +64,9 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.blast_furnace_fuel) {
         registry.addRecipeCategories(new BlastFurnaceFuelCategory(jeiHelpers.getGuiHelper()));
       }
+      if(MTEEnoughItemsConfig.railcraft.worldspike_fuel) {
+        registry.addRecipeCategories(new WorldSpikeFuelCategory(jeiHelpers.getGuiHelper()));
+      }
     }
   }
 
@@ -73,6 +78,10 @@ public class MTEEIPlugin implements IModPlugin {
     MTEEnoughItems.getLogger().info("Started loading recipes...");
 
     if(ModChecker.Forestry.isLoaded()){
+      registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
+      registry.addRecipeClickArea(GuiGenerator.class,68,38,40,18,BioGeneratorCategory.UID);
+      registry.addRecipeClickArea(GuiEnginePeat.class,45,27,14,14, PeatEngineCategory.UID);
+
       if(MTEEnoughItemsConfig.forestry.peat_engine){
         registry.addRecipes(PeatEngineCategory.getRecipes(jeiHelpers),PeatEngineCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(ModuleEnergy.getBlocks().peatEngine),PeatEngineCategory.UID);
@@ -86,12 +95,27 @@ public class MTEEIPlugin implements IModPlugin {
         registry.addRecipes(BioGeneratorCategory.getRecipes(jeiHelpers),BioGeneratorCategory.UID);
         registry.addRecipeCatalyst(new ItemStack(PluginIC2.getBlocks().generator),BioGeneratorCategory.UID);
       }
-
-      registry.addRecipeClickArea(GuiEngineBiogas.class,52,27,36,14,BiogasEngineCategory.UID);
-      registry.addRecipeClickArea(GuiGenerator.class,68,38,40,18,BioGeneratorCategory.UID);
-      registry.addRecipeClickArea(GuiEnginePeat.class,45,27,14,14, PeatEngineCategory.UID);
     }
+
     if(ModChecker.Railcraft.isLoaded()){
+      registry.addRecipeClickArea(GuiBlastFurnace.class,56,36,14,14,BlastFurnaceFuelCategory.UID);
+      registry.addRecipeClickArea(GuiWorldspike.class,90,23,32,18,WorldSpikeFuelCategory.UID);
+
+      registry.addRecipeClickArea(GuiBoilerFluid.class,62,38,14,14,FluidFireboxCategory.UID,BoilerCategory.UID);
+      registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
+
+      for (int i = 1; i <=3; i++) {
+        addItemCatalystIfNotNull(RailcraftBlocks.WORLDSPIKE.item(),i, registry, WorldSpikeFuelCategory.UID);
+      }
+
+      addItemCatalystIfNotNull(RailcraftBlocks.BLAST_FURNACE.item(), registry, BlastFurnaceFuelCategory.UID);
+
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox){
         registry.addRecipes(FluidFireboxCategory.getRecipes(jeiHelpers), FluidFireboxCategory.UID);
       }
@@ -101,27 +125,20 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.blast_furnace_fuel) {
         registry.addRecipes(BlastFurnaceFuelCategory.getRecipes(jeiHelpers), BlastFurnaceFuelCategory.UID);
       }
-
-      registry.addRecipeClickArea(GuiBlastFurnace.class,56,36,14,14,BlastFurnaceFuelCategory.UID);
-
-      registry.addRecipeClickArea(GuiBoilerFluid.class,62,38,14,14,FluidFireboxCategory.UID,BoilerCategory.UID);
-      registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
-
-      addItemCatalystIfNotNull(RailcraftBlocks.BLAST_FURNACE.item(), registry, BlastFurnaceFuelCategory.UID);
-
-      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
-      addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);
-      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
-      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
-      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
+      if(MTEEnoughItemsConfig.railcraft.worldspike_fuel) {
+        registry.addRecipes(WorldSpikeFuelCategory.getRecipes(jeiHelpers), WorldSpikeFuelCategory.UID);
+      }
     }
 
     MTEEnoughItems.getLogger().info("Loaded all recipes!");
   }
 
   private static void addItemCatalystIfNotNull(@Nullable Item catalyst, IModRegistry registry, String... uid) {
+    addItemCatalystIfNotNull(catalyst, 0, registry, uid);
+  }
+  private static void addItemCatalystIfNotNull(@Nullable Item catalyst, int meta, IModRegistry registry, String... uid) {
     if (catalyst != null)
-      registry.addRecipeCatalyst(new ItemStack(catalyst), uid);
+      registry.addRecipeCatalyst(new ItemStack(catalyst, 1, meta), uid);
   }
 
 

@@ -64,7 +64,7 @@ public class BlastFurnaceFuelCategory extends GenericRecipeCategory<BlastFurnace
 
     @Override
     public String getModName() {
-        return ModChecker.Forestry.name;
+        return ModChecker.Railcraft.name;
     }
 
     public static List<BlastFurnaceFuelRecipeWrapper> getRecipes(IJeiHelpers jeiHelpers){
