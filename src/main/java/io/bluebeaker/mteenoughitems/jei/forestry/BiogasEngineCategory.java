@@ -86,16 +86,22 @@ public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineC
         return recipes;
     }
 
+    public static float getMinLoss(int dissipationMultiplier){
+        int maxHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY * 3 - dissipationMultiplier*2;
+        return maxHeatGain < 0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA / maxHeatGain : 0;
+    }
+    public static float getMaxLoss(int dissipationMultiplier){
+        int minHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY - dissipationMultiplier;
+        return minHeatGain<0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA /minHeatGain : 0;
+    }
+
     public static class TooltipCallback implements ITooltipCallback<FluidStack> {
         public final float minLoss;
         public final float maxLoss;
 
         public TooltipCallback(BiogasEngineRecipeWrapper wrapper) {
-            int minHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY - wrapper.dissipationMultiplier;
-            int maxHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY * 3 - wrapper.dissipationMultiplier*2;
-
-            minLoss = maxHeatGain<0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA /maxHeatGain : 0;
-            maxLoss = maxHeatGain<0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA /minHeatGain : 0;
+            minLoss = getMinLoss(wrapper.dissipationMultiplier);
+            maxLoss = getMaxLoss(wrapper.dissipationMultiplier);
         }
 
         @Override
@@ -135,11 +141,9 @@ public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineC
 
             RenderUtils.drawTextAlignedLeft(this.energy+getPowerUnit()+"/mB", xPos, yPos, Color.gray.getRGB());
 
-            int minHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY - dissipationMultiplier;
-            int maxHeatGain = Constants.ENGINE_BRONZE_HEAT_GENERATION_ENERGY * 3 - dissipationMultiplier*2;
+            float minLoss = getMinLoss(dissipationMultiplier);
+            float maxLoss = getMaxLoss(dissipationMultiplier);
 
-            float minLoss = maxHeatGain<0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA /maxHeatGain : 0;
-            float maxLoss = maxHeatGain<0 ? (float) -Constants.ENGINE_HEAT_VALUE_LAVA /minHeatGain : 0;
             if(maxLoss>0 || minLoss>0){
                 RenderUtils.drawTextAlignedLeft("!", recipeWidth-7, recipeHeight/2-8, Color.red.getRGB());
             }
