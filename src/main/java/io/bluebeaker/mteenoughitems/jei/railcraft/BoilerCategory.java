@@ -1,36 +1,29 @@
 package io.bluebeaker.mteenoughitems.jei.railcraft;
 
 import io.bluebeaker.mteenoughitems.Categories;
-import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidHeatConversionCategory;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidHeatConversionRecipe;
-import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
+import io.bluebeaker.mteenoughitems.utils.RenderUtils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
-import mods.railcraft.api.fuel.FluidFuelManager;
 import mods.railcraft.common.blocks.RailcraftBlocks;
 import mods.railcraft.common.fluids.Fluids;
 import mods.railcraft.common.util.steam.SteamConstants;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class BoilerCategory extends FluidHeatConversionCategory<BoilerRecipe> {
+public class BoilerCategory extends FluidHeatConversionCategory<BoilerCategory.BoilerRecipe> {
     protected final IDrawableStatic bgFire;
     protected final IDrawableAnimated fire;
 
@@ -65,5 +58,23 @@ public class BoilerCategory extends FluidHeatConversionCategory<BoilerRecipe> {
         List<BoilerRecipe> recipes = new ArrayList<>();
         recipes.add(new BoilerRecipe(jeiHelpers,new FluidStack(FluidRegistry.WATER,1),new FluidStack(Fluids.STEAM.get(), SteamConstants.STEAM_PER_UNIT_WATER)));
         return recipes;
+    }
+
+    public static class BoilerRecipe extends FluidHeatConversionRecipe {
+        public BoilerRecipe(IJeiHelpers jeiHelpers, FluidStack input, FluidStack output) {
+            super(jeiHelpers, input, output, 1);
+        }
+
+        @Override
+        public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+            int xPos = recipeWidth/2;
+            int yPos = recipeHeight/2 - minecraft.fontRenderer.FONT_HEIGHT;
+            RenderUtils.drawTextAlignedMiddle(">=100°C", xPos, yPos, Color.gray.getRGB());
+        }
+
+        @Override
+        public String getPowerUnit() {
+            return "";
+        }
     }
 }

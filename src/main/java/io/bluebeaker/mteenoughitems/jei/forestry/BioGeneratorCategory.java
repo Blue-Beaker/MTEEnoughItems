@@ -2,10 +2,11 @@ package io.bluebeaker.mteenoughitems.jei.forestry;
 
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.GeneratorFuel;
-import forestry.energy.ModuleEnergy;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeCategory;
+import io.bluebeaker.mteenoughitems.jei.generic.FluidPowerRecipeWrapper;
+import io.bluebeaker.mteenoughitems.utils.EnergyUnit;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -17,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorRecipeWrapper> {
+public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorCategory.BioGeneratorRecipeWrapper> {
     public static final String UID = Categories.Forestry.BIO_GENERATOR_UID;
 
     public BioGeneratorCategory(IGuiHelper guiHelper) {
@@ -56,5 +57,16 @@ public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorR
         }
 
         return recipes;
+    }
+
+    public static class BioGeneratorRecipeWrapper extends FluidPowerRecipeWrapper {
+        public BioGeneratorRecipeWrapper(IJeiHelpers jeiHelpers, Fluid fluid, long power, long energy) {
+            super(jeiHelpers, fluid, power, energy);
+        }
+
+        @Override
+        public String getPowerUnit() {
+            return EnergyUnit.EU.name;
+        }
     }
 }

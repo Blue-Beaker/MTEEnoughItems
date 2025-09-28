@@ -1,8 +1,10 @@
 package io.bluebeaker.mteenoughitems.jei.railcraft;
 
 import io.bluebeaker.mteenoughitems.Categories;
+import io.bluebeaker.mteenoughitems.jei.generic.FuelRecipeWrapper;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
+import io.bluebeaker.mteenoughitems.utils.RenderUtils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -18,10 +20,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlastFurnaceFuelCategory extends GenericRecipeCategory<BlastFurnaceFuelRecipeWrapper> {
+public class BlastFurnaceFuelCategory extends GenericRecipeCategory<BlastFurnaceFuelCategory.BlastFurnaceFuelRecipeWrapper> {
     public static final String UID = Categories.Railcraft.BLAST_FURNACE_FUEL_UID;
     public static final ResourceLocation GUI_PATH = new ResourceLocation("railcraft","textures/gui/gui_blast_furnace.png");
     protected final IDrawableStatic bgHeatBar;
@@ -74,5 +77,22 @@ public class BlastFurnaceFuelCategory extends GenericRecipeCategory<BlastFurnace
         }
 
         return recipes;
+    }
+
+    public static class BlastFurnaceFuelRecipeWrapper extends FuelRecipeWrapper {
+
+        public BlastFurnaceFuelRecipeWrapper(ItemStack input, int duration) {
+            super(input, 0, duration);
+        }
+
+        @Override
+        public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+            int xPos = recipeWidth / 2;
+            int yPos = recipeHeight / 2 - minecraft.fontRenderer.FONT_HEIGHT;
+
+            RenderUtils.drawTextAlignedMiddle(this.duration + "ticks", xPos, yPos, Color.gray.getRGB());
+            yPos += minecraft.fontRenderer.FONT_HEIGHT + 2;
+            RenderUtils.drawTextAlignedMiddle(this.duration/20 + "secs", xPos, yPos, Color.gray.getRGB());
+        }
     }
 }
