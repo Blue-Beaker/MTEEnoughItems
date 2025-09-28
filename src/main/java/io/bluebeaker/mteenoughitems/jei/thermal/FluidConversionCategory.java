@@ -5,6 +5,7 @@ import cofh.thermalfoundation.init.TFFluids;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.Constants;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
+import io.bluebeaker.mteenoughitems.utils.Area2i;
 import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.IGuiHelper;
@@ -17,8 +18,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -146,9 +149,13 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
         public final ItemStack outputItem;
         public final Fluid inputFluid;
         public final Fluid outputFluid;
+        public final IBlockState inputState;
+        public final IBlockState outputState;
         public Wrapper(Fluid fluid, IBlockState input, IBlockState output, @Nullable ItemStack inItem, @Nullable ItemStack outItem) {
             super();
             this.fluid = fluid;
+            inputState=input;
+            outputState=output;
             Block inputBlock = input.getBlock();
             Block outputBlock = output.getBlock();
 
@@ -181,6 +188,19 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
             int xPos = recipeWidth / 2;
             int yPos = recipeHeight / 2 - minecraft.fontRenderer.FONT_HEIGHT;
 
+        }
+
+        @Override
+        public List<String> getTooltipStrings(int mouseX, int mouseY) {
+            if(this.outputFluid!=null || !this.outputItem.isEmpty()) return Collections.emptyList();
+            Area2i area2i = new Area2i(90, 7, 18, 18);
+            if(area2i.isInBounds(mouseX,mouseY)){
+                List<String> tip = new ArrayList<>();
+                tip.add(outputState.getBlock().getLocalizedName());
+                tip.add(outputState.toString());
+                return tip;
+            }
+            return Collections.emptyList();
         }
     }
 }
