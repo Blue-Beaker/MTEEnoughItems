@@ -4,6 +4,8 @@ import net.minecraftforge.fml.common.Loader;
 
 public enum ModChecker {
     Forestry("forestry"),
+    BuildcraftSilicon("buildcraftsilicon"),
+    ImmersiveEngineering("immersiveengineering"),
     Railcraft("railcraft"),
     ThermalFoundation("thermalfoundation"),
     ThermalExpansion("thermalexpansion"),

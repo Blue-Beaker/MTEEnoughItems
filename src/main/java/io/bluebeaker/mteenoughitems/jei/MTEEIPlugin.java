@@ -1,5 +1,6 @@
 package io.bluebeaker.mteenoughitems.jei;
 
+import buildcraft.silicon.BCSiliconItems;
 import forestry.energy.ModuleEnergy;
 import forestry.energy.gui.GuiEngineBiogas;
 import forestry.energy.gui.GuiEnginePeat;
@@ -7,6 +8,7 @@ import forestry.energy.gui.GuiGenerator;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
+import io.bluebeaker.mteenoughitems.jei.buildcraft.GateSubTypeInterpreter;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
@@ -25,9 +27,7 @@ import mods.railcraft.client.gui.GuiBoilerSolid;
 import mods.railcraft.client.gui.GuiWorldspike;
 import mods.railcraft.common.blocks.RailcraftBlocks;
 import mods.railcraft.common.carts.RailcraftCarts;
-import mods.railcraft.common.items.RailcraftItems;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -154,20 +154,11 @@ public class MTEEIPlugin implements IModPlugin {
     MTEEIPlugin.jeiRuntime = jeiRuntimeIn;
   }
 
-  public static void setFilterText(@Nonnull String filterText) {
-    jeiRuntime.getIngredientFilter().setFilterText(filterText);
-  }
-
-  public static String getFilterText() {
-    return jeiRuntime.getIngredientFilter().getFilterText();
-  }
-
-  public static void showCraftingRecipes() {
-  }
-
   @Override
   public void registerSubtypes(ISubtypeRegistry subtypeRegistry) {
-    IModPlugin.super.registerSubtypes(subtypeRegistry);
+    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.gatesubtypes) {
+        subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugGate,new GateSubTypeInterpreter());
+    }
   }
 
   @Override

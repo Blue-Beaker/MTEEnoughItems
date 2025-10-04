@@ -63,6 +63,9 @@ dependencies {
     implementation rfg.deobf('libs:ThermalExpansion-1.12.2-5.5.7.1-universal')
     implementation rfg.deobf('libs:ThermalFoundation-1.12.2-2.6.7.1-universal')
 
+    implementation rfg.deobf('libs:buildcraft-all-7.99.24.8')
+
+    implementation rfg.deobf('libs:ImmersiveEngineering-0.12-98')
     // Crafttweaker
     //implementation rfg.deobf("curse.maven:mtlib-253211:3308160")
     //implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${project.version_crafttweaker}")

@@ -45,4 +45,12 @@ public class MTEEnoughItemsConfig {
         @LangKey(Categories.Thermal.TREE_EXTRACTOR)
         public boolean tree_extractor = true;
     }
+    @LangKey("config.mteenoughitems.buildcraft.name")
+    public static Buildcraft buildcraft = new Buildcraft();
+    public static class Buildcraft{
+        @Config.RequiresMcRestart
+        @Config.Comment("Register subtypes for BC gate in JEI.")
+        @LangKey("config.mteenoughitems.buildcraft.gatesubtypes")
+        public boolean gatesubtypes = true;
+    }
 }
