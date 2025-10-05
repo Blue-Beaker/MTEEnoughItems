@@ -5,7 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,5 +27,26 @@ public class ItemUtils {
         if(stack.getCount()!=1)
             builder.append("*").append(stack.getCount());
         return builder.toString();
+    }
+
+    @Nullable
+    public static Item getItemById(ResourceLocation id){
+        return Item.REGISTRY.getObject(id);
+    }
+    @Nullable
+    public static Item getItemById(String id){
+        return getItemById(new ResourceLocation(id));
+    }
+
+    public static ItemStack getItemstackById(String modid, String id){
+        Item item = getItemById(new ResourceLocation(modid,id));
+        if(item==null) return ItemStack.EMPTY;
+        return new ItemStack(item);
+    }
+    public static ItemStack getItemstackByIdAndMeta(String modid, String id, int meta){
+        ItemStack stack = getItemstackById(modid,id);
+        if(stack.isEmpty()) return stack;
+        stack.setItemDamage(meta);
+        return stack;
     }
 }
