@@ -1,6 +1,10 @@
 package io.bluebeaker.mteenoughitems.jei;
 
+import buildcraft.compat.module.jei.silicon.CategoryAssemblyTable;
+import buildcraft.silicon.BCSiliconBlocks;
 import buildcraft.silicon.BCSiliconItems;
+import buildcraft.silicon.container.ContainerAssemblyTable;
+import buildcraft.silicon.gui.GuiAssemblyTable;
 import forestry.energy.ModuleEnergy;
 import forestry.energy.gui.GuiEngineBiogas;
 import forestry.energy.gui.GuiEnginePeat;
@@ -8,6 +12,8 @@ import forestry.energy.gui.GuiGenerator;
 import forestry.plugins.PluginIC2;
 import io.bluebeaker.mteenoughitems.MTEEnoughItems;
 import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
+import io.bluebeaker.mteenoughitems.jei.buildcraft.FacadeAssemblyCategory;
+import io.bluebeaker.mteenoughitems.jei.buildcraft.FacadeSubTypeInterpreter;
 import io.bluebeaker.mteenoughitems.jei.buildcraft.GateSubTypeInterpreter;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
@@ -17,6 +23,7 @@ import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.WorldSpikeFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.FluidConversionCategory;
+import io.bluebeaker.mteenoughitems.utils.LogTimer;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -30,7 +37,6 @@ import mods.railcraft.common.carts.RailcraftCarts;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 
@@ -72,6 +78,9 @@ public class MTEEIPlugin implements IModPlugin {
     if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
       registry.addRecipeCategories(new FluidConversionCategory(guiHelper));
     }
+    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.facade_assembly){
+      registry.addRecipeCategories(new FacadeAssemblyCategory(guiHelper));
+    }
   }
 
   @Override
@@ -79,6 +88,7 @@ public class MTEEIPlugin implements IModPlugin {
     modRegistry=registry;
     IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 
+    LogTimer timer = new LogTimer();
     MTEEnoughItems.getLogger().info("Started loading recipes...");
 
     if(ModChecker.Forestry.isLoaded()){
@@ -100,6 +110,8 @@ public class MTEEIPlugin implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(PluginIC2.getBlocks().generator),BioGeneratorCategory.UID);
       }
     }
+
+    MTEEnoughItems.getLogger().info("Loaded Forestry recipes in {}ms",timer.stagedTime());
 
     if(ModChecker.Railcraft.isLoaded()){
       registry.addRecipeClickArea(GuiBlastFurnace.class,56,36,14,14,BlastFurnaceFuelCategory.UID);
@@ -132,9 +144,24 @@ public class MTEEIPlugin implements IModPlugin {
       if(MTEEnoughItemsConfig.railcraft.worldspike_fuel) {
         registry.addRecipes(WorldSpikeFuelCategory.getRecipes(jeiHelpers), WorldSpikeFuelCategory.UID);
       }
+      MTEEnoughItems.getLogger().info("Loaded Railcraft recipes in {}ms",timer.stagedTime());
     }
+
+
     if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
       registry.addRecipes(FluidConversionCategory.getRecipes(jeiHelpers), FluidConversionCategory.UID);
+      MTEEnoughItems.getLogger().info("Loaded Thermal recipes in {}ms",timer.stagedTime());
+    }
+
+
+    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.facade_assembly){
+      registry.addRecipes(FacadeAssemblyCategory.getRecipes(jeiHelpers),FacadeAssemblyCategory.UID);
+      registry.addRecipeCatalyst(new ItemStack(BCSiliconBlocks.assemblyTable),FacadeAssemblyCategory.UID);
+
+      registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerAssemblyTable.class, FacadeAssemblyCategory.UID, 36, 12, 0, 36);
+      registry.addRecipeClickArea(GuiAssemblyTable.class,86,36,4,70,FacadeAssemblyCategory.UID, CategoryAssemblyTable.UID);
+
+      MTEEnoughItems.getLogger().info("Loaded BuildCraft recipes in {}ms",timer.stagedTime());
     }
 
     MTEEnoughItems.getLogger().info("Loaded all recipes!");
@@ -157,7 +184,10 @@ public class MTEEIPlugin implements IModPlugin {
   @Override
   public void registerSubtypes(ISubtypeRegistry subtypeRegistry) {
     if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.gatesubtypes) {
+      if(BCSiliconItems.plugGate!=null)
         subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugGate,new GateSubTypeInterpreter());
+      if(BCSiliconItems.plugFacade!=null)
+        subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugFacade,new FacadeSubTypeInterpreter());
     }
   }
 

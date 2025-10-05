@@ -49,8 +49,12 @@ public class MTEEnoughItemsConfig {
     public static Buildcraft buildcraft = new Buildcraft();
     public static class Buildcraft{
         @Config.RequiresMcRestart
-        @Config.Comment("Register subtypes for BC gate in JEI.")
+        @Config.Comment("Register ingredient subtypes for BC gate and Facades in JEI.")
         @LangKey("config.mteenoughitems.buildcraft.gatesubtypes")
         public boolean gatesubtypes = true;
+
+        @Config.RequiresMcRestart
+        @LangKey(Categories.BuildCraft.FACADE_ASSEMBLY)
+        public boolean facade_assembly = true;
     }
 }
