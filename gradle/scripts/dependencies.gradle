@@ -52,7 +52,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:forestry-59751:2918418")
     implementation rfg.deobf("libs:industrialcraft-2-2.8.222-ex112")
     // Railcraft
-    implementation rfg.deobf('libs:railcraft-12.0.0')
+    compileOnly rfg.deobf('libs:railcraft-12.0.0')
 
     //Thermal
     implementation rfg.deobf('libs:CodeChickenLib-1.12.2-3.2.3.358-universal')
@@ -63,8 +63,9 @@ dependencies {
     implementation rfg.deobf('libs:ThermalExpansion-1.12.2-5.5.7.1-universal')
     implementation rfg.deobf('libs:ThermalFoundation-1.12.2-2.6.7.1-universal')
 
-    implementation rfg.deobf('libs:buildcraft-all-7.99.24.8')
-
+    //Buildcraft
+    compileOnly rfg.deobf('libs:buildcraft-all-7.99.24.8')
+    //ImmersiveEngineering
     implementation rfg.deobf('libs:ImmersiveEngineering-0.12-98')
     // Crafttweaker
     //implementation rfg.deobf("curse.maven:mtlib-253211:3308160")

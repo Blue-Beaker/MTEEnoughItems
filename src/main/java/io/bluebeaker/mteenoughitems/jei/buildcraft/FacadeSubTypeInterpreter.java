@@ -1,5 +1,6 @@
 package io.bluebeaker.mteenoughitems.jei.buildcraft;
 
+import buildcraft.silicon.BCSiliconItems;
 import buildcraft.silicon.gate.GateVariant;
 import buildcraft.silicon.item.ItemPluggableFacade;
 import buildcraft.silicon.item.ItemPluggableGate;
@@ -24,5 +25,10 @@ public class FacadeSubTypeInterpreter implements ISubtypeRegistry.ISubtypeInterp
         }
 
         return builder.toString();
+    }
+
+    public static void register(ISubtypeRegistry subtypeRegistry) {
+        if(BCSiliconItems.plugFacade!=null)
+            subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugFacade,new FacadeSubTypeInterpreter());
     }
 }

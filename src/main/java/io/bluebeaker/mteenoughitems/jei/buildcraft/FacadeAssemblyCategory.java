@@ -2,22 +2,15 @@ package io.bluebeaker.mteenoughitems.jei.buildcraft;
 
 import buildcraft.api.BCItems;
 import buildcraft.api.mj.MjAPI;
-import buildcraft.api.recipes.IngredientStack;
-import buildcraft.lib.misc.ItemStackKey;
-import buildcraft.lib.recipe.ChangingItemStack;
 import buildcraft.silicon.BCSiliconBlocks;
 import buildcraft.silicon.plug.FacadeBlockStateInfo;
 import buildcraft.silicon.plug.FacadeStateManager;
 import buildcraft.silicon.recipe.FacadeAssemblyRecipes;
-import forestry.energy.ModuleEnergy;
 import io.bluebeaker.mteenoughitems.Categories;
-import io.bluebeaker.mteenoughitems.jei.MTEEIPlugin;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
-import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import io.bluebeaker.mteenoughitems.utils.RenderUtils;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -87,7 +80,7 @@ public class FacadeAssemblyCategory extends GenericRecipeCategory<FacadeAssembly
         guiItemStacks.set(12, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
 
-    public static List<Wrapper> getRecipes(IJeiHelpers jeiHelpers){
+    public static List<Wrapper> getRecipes(){
         List<Wrapper> recipes = new ArrayList<>();
         // Getting all items from FacadeBlockStateInfo for performance
         for (FacadeBlockStateInfo info : FacadeStateManager.validFacadeStates.values()) {

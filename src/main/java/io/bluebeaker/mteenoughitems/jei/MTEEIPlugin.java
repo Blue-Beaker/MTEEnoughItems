@@ -78,9 +78,6 @@ public class MTEEIPlugin implements IModPlugin {
     if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
       registry.addRecipeCategories(new FluidConversionCategory(guiHelper));
     }
-    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.facade_assembly){
-      registry.addRecipeCategories(new FacadeAssemblyCategory(guiHelper));
-    }
   }
 
   @Override
@@ -152,25 +149,12 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipes(FluidConversionCategory.getRecipes(jeiHelpers), FluidConversionCategory.UID);
       MTEEnoughItems.getLogger().info("Loaded Thermal recipes in {}ms",timer.stagedTime());
     }
-
-
-    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.facade_assembly){
-      registry.addRecipes(FacadeAssemblyCategory.getRecipes(jeiHelpers),FacadeAssemblyCategory.UID);
-      registry.addRecipeCatalyst(new ItemStack(BCSiliconBlocks.assemblyTable),FacadeAssemblyCategory.UID);
-
-      registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerAssemblyTable.class, FacadeAssemblyCategory.UID, 36, 12, 0, 36);
-      registry.addRecipeClickArea(GuiAssemblyTable.class,86,36,4,70,FacadeAssemblyCategory.UID, CategoryAssemblyTable.UID);
-
-      MTEEnoughItems.getLogger().info("Loaded BuildCraft recipes in {}ms",timer.stagedTime());
-    }
-
-    MTEEnoughItems.getLogger().info("Loaded all recipes!");
   }
 
-  private static void addItemCatalystIfNotNull(@Nullable Item catalyst, IModRegistry registry, String... uid) {
+  public static void addItemCatalystIfNotNull(@Nullable Item catalyst, IModRegistry registry, String... uid) {
     addItemCatalystIfNotNull(catalyst, 0, registry, uid);
   }
-  private static void addItemCatalystIfNotNull(@Nullable Item catalyst, int meta, IModRegistry registry, String... uid) {
+  public static void addItemCatalystIfNotNull(@Nullable Item catalyst, int meta, IModRegistry registry, String... uid) {
     if (catalyst != null)
       registry.addRecipeCatalyst(new ItemStack(catalyst, 1, meta), uid);
   }
@@ -179,16 +163,6 @@ public class MTEEIPlugin implements IModPlugin {
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntimeIn) {
     MTEEIPlugin.jeiRuntime = jeiRuntimeIn;
-  }
-
-  @Override
-  public void registerSubtypes(ISubtypeRegistry subtypeRegistry) {
-    if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.gatesubtypes) {
-      if(BCSiliconItems.plugGate!=null)
-        subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugGate,new GateSubTypeInterpreter());
-      if(BCSiliconItems.plugFacade!=null)
-        subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugFacade,new FacadeSubTypeInterpreter());
-    }
   }
 
   @Override
