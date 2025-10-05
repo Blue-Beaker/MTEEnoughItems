@@ -13,8 +13,8 @@ public class GateSubTypeInterpreter implements ISubtypeRegistry.ISubtypeInterpre
         return variant.getVariantName();
     }
 
-    public static void register(ISubtypeRegistry subtypeRegistry){
+    public void register(ISubtypeRegistry subtypeRegistry){
         if(BCSiliconItems.plugGate!=null)
-            subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugGate,new GateSubTypeInterpreter());
+            subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugGate,this);
     }
 }

@@ -27,8 +27,8 @@ public class FacadeSubTypeInterpreter implements ISubtypeRegistry.ISubtypeInterp
         return builder.toString();
     }
 
-    public static void register(ISubtypeRegistry subtypeRegistry) {
+    public void register(ISubtypeRegistry subtypeRegistry) {
         if(BCSiliconItems.plugFacade!=null)
-            subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugFacade,new FacadeSubTypeInterpreter());
+            subtypeRegistry.registerSubtypeInterpreter(BCSiliconItems.plugFacade,this);
     }
 }

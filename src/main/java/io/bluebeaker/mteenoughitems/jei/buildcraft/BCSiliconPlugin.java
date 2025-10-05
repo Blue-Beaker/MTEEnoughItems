@@ -30,8 +30,8 @@ public class BCSiliconPlugin implements IModPlugin {
     @Override
     public void registerSubtypes(ISubtypeRegistry subtypeRegistry) {
         if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.gatesubtypes) {
-            GateSubTypeInterpreter.register(subtypeRegistry);
-            FacadeSubTypeInterpreter.register(subtypeRegistry);
+            new GateSubTypeInterpreter().register(subtypeRegistry);
+            new FacadeSubTypeInterpreter().register(subtypeRegistry);
         }
     }
 
