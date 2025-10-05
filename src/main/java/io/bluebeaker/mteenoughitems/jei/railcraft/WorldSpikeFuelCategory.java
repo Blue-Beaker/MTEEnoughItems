@@ -69,7 +69,7 @@ public class WorldSpikeFuelCategory extends GenericRecipeCategory<WorldSpikeFuel
         for (int i = 1; i < WorldspikeVariant.values().length; i++) {
             Map<Ingredient, Float> fuelList = WorldspikeVariant.fromId(i).getFuelList();
             for (Ingredient ingredient : fuelList.keySet()) {
-                recipes.add(new Wrapper(ingredient,fuelList.get(ingredient),1));
+                recipes.add(new Wrapper(ingredient,fuelList.get(ingredient),i));
             }
         }
         return recipes;
