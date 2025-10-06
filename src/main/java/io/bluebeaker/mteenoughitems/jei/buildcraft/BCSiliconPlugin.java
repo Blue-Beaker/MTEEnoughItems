@@ -18,7 +18,7 @@ public class BCSiliconPlugin implements IModPlugin {
         if(ModChecker.BuildcraftSilicon.isLoaded() && MTEEnoughItemsConfig.buildcraft.facade_assembly){
             LogTimer timer = new LogTimer();
             registry.addRecipes(FacadeAssemblyCategory.getRecipes(),FacadeAssemblyCategory.UID);
-            registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.BuildcraftSilicon.name,"assembly_table"),FacadeAssemblyCategory.UID);
+            registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.BuildcraftSilicon.name,"assembly_table"),FacadeAssemblyCategory.UID);
 
             registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerAssemblyTable.class, FacadeAssemblyCategory.UID, 36, 12, 0, 36);
             registry.addRecipeClickArea(GuiAssemblyTable.class,86,36,4,70,FacadeAssemblyCategory.UID, CategoryAssemblyTable.UID);

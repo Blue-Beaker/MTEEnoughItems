@@ -13,6 +13,7 @@ import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.WorldSpikeFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.FluidConversionCategory;
+import io.bluebeaker.mteenoughitems.jei.thermal.TreeFluidCategory;
 import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.LogTimer;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
@@ -67,6 +68,9 @@ public class MTEEIPlugin implements IModPlugin {
     if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
       registry.addRecipeCategories(new FluidConversionCategory(guiHelper));
     }
+    if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
+      registry.addRecipeCategories(new TreeFluidCategory(guiHelper));
+    }
   }
 
   @Override
@@ -84,16 +88,16 @@ public class MTEEIPlugin implements IModPlugin {
 
       if(MTEEnoughItemsConfig.forestry.peat_engine){
         registry.addRecipes(PeatEngineCategory.getRecipes(jeiHelpers),PeatEngineCategory.UID);
-        registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Forestry.name, "engine_peat"),PeatEngineCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Forestry.name, "engine_peat"),PeatEngineCategory.UID);
       }
       if(MTEEnoughItemsConfig.forestry.biogas_engine){
         registry.addRecipes(BiogasEngineCategory.getRecipes(jeiHelpers),BiogasEngineCategory.UID);
-        registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Forestry.name, "engine_biogas"),BiogasEngineCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Forestry.name, "engine_biogas"),BiogasEngineCategory.UID);
       }
 
       if(MTEEnoughItemsConfig.forestry.bio_generator && ModChecker.IC2.isLoaded()){
         registry.addRecipes(BioGeneratorCategory.getRecipes(jeiHelpers),BioGeneratorCategory.UID);
-        registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Forestry.name, "engine_generator"),BioGeneratorCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Forestry.name, "engine_generator"),BioGeneratorCategory.UID);
       }
     }
 
@@ -107,20 +111,20 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipeClickArea(GuiBoilerSolid.class,62,22,14,14,BoilerCategory.UID);
 
       for (int i = 1; i <=3; i++) {
-        registry.addRecipeCatalyst(ItemUtils.getItemstackByIdAndMeta(ModChecker.Railcraft.name, "worldspike",i), WorldSpikeFuelCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "worldspike",i), WorldSpikeFuelCategory.UID);
       }
 
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "blast_furnace"), BlastFurnaceFuelCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "blast_furnace"), BlastFurnaceFuelCategory.UID);
 
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "boiler_firebox_solid"), BoilerCategory.UID);
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "locomotive_steam_solid"), BoilerCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_firebox_solid"), BoilerCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "locomotive_steam_solid"), BoilerCategory.UID);
 
 //      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
 //      addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);
 
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "boiler_firebox_fluid"),FluidFireboxCategory.UID, BoilerCategory.UID);
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "boiler_tank_pressure_high"),FluidFireboxCategory.UID, BoilerCategory.UID);
-      registry.addRecipeCatalyst(ItemUtils.getItemstackById(ModChecker.Railcraft.name, "boiler_tank_pressure_low"),FluidFireboxCategory.UID, BoilerCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_firebox_fluid"),FluidFireboxCategory.UID, BoilerCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_tank_pressure_high"),FluidFireboxCategory.UID, BoilerCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_tank_pressure_low"),FluidFireboxCategory.UID, BoilerCategory.UID);
 
 //      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
 //      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
@@ -144,7 +148,12 @@ public class MTEEIPlugin implements IModPlugin {
 
     if(ModChecker.ThermalFoundation.isLoaded() && MTEEnoughItemsConfig.thermal.fluid_conversion){
       registry.addRecipes(FluidConversionCategory.getRecipes(jeiHelpers), FluidConversionCategory.UID);
-      MTEEnoughItems.getLogger().info("Loaded Thermal recipes in {}ms",timer.stagedTime());
+      MTEEnoughItems.getLogger().info("Loaded Thermal Foundation recipes in {}ms",timer.stagedTime());
+    }
+    if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
+      registry.addRecipes(TreeFluidCategory.getRecipes(jeiHelpers), TreeFluidCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ThermalExpansion.name, "device",3),TreeFluidCategory.UID);
+      MTEEnoughItems.getLogger().info("Loaded Thermal Expansion recipes in {}ms",timer.stagedTime());
     }
   }
 
