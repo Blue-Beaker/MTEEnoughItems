@@ -38,13 +38,13 @@ public class ItemUtils {
         return getItemById(new ResourceLocation(id));
     }
 
-    public static ItemStack getItemstackById(String modid, String id){
+    public static ItemStack getItemstack(String modid, String id){
         Item item = getItemById(new ResourceLocation(modid,id));
         if(item==null) return ItemStack.EMPTY;
         return new ItemStack(item);
     }
-    public static ItemStack getItemstackByIdAndMeta(String modid, String id, int meta){
-        ItemStack stack = getItemstackById(modid,id);
+    public static ItemStack getItemstack(String modid, String id, int meta){
+        ItemStack stack = getItemstack(modid,id);
         if(stack.isEmpty()) return stack;
         stack.setItemDamage(meta);
         return stack;

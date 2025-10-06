@@ -1,0 +1,61 @@
+package io.bluebeaker.mteenoughitems.utils.world;
+
+import net.minecraft.profiler.Profiler;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.storage.ISaveHandler;
+import net.minecraft.world.storage.SaveHandlerMP;
+import net.minecraft.world.storage.WorldInfo;
+
+public class DummyWorld extends World {
+    public DummyWorld(){
+        this(
+                new SaveHandlerMP(),
+                new WorldInfo(
+                        new WorldSettings(
+                                0,
+                                GameType.CREATIVE,
+                                true,
+                                false,
+                                WorldType.DEFAULT
+                        ),
+                        "fake"
+                ),
+                new WorldProvider() {
+                    @Override
+                    public DimensionType getDimensionType() {
+                        return DimensionType.OVERWORLD;
+                    }
+                },
+                new Profiler(),
+                true
+        );
+        chunkProvider = new DummyChunkProvider(this);
+        this.provider.setWorld(this);
+    }
+
+    protected DummyWorld(ISaveHandler saveHandlerIn, WorldInfo info, WorldProvider providerIn, Profiler profilerIn, boolean client) {
+        super(saveHandlerIn, info, providerIn, profilerIn, client);
+    }
+
+    @Override
+    protected IChunkProvider createChunkProvider() {
+        return chunkProvider;
+    }
+
+    @Override
+    protected boolean isChunkLoaded(int x, int z, boolean allowEmpty) {
+        return chunkProvider.isChunkGeneratedAt(x,z);
+    }
+
+    @Override
+    public void tick() {
+        for (TileEntity tile : ((DummyChunkProvider)chunkProvider).getTileEntities()) {
+            if(tile instanceof ITickable){
+                ((ITickable)tile).update();
+            }
+        }
+    }
+}

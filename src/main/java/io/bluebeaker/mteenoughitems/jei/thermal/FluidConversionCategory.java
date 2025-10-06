@@ -5,6 +5,7 @@ import cofh.thermalfoundation.init.TFFluids;
 import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.Constants;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
+import io.bluebeaker.mteenoughitems.jei.thermal.accessors.FluidInteractiveAccessor;
 import io.bluebeaker.mteenoughitems.utils.Area2i;
 import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
@@ -18,10 +19,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -32,7 +31,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -106,8 +104,8 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
     protected static List<Wrapper> getRecipesForBlock(BlockFluidInteractive fluidBlock){
         List<Wrapper> recipes = new ArrayList<>();
         // Access the maps
-        HashMap<IBlockState, IBlockState> collisionMap = ThermalAccessors.collisionMap.get(fluidBlock);
-        HashMap<Block, IBlockState> anyStateMap = ThermalAccessors.anyState.get(fluidBlock);
+        HashMap<IBlockState, IBlockState> collisionMap = FluidInteractiveAccessor.collisionMap.get(fluidBlock);
+        HashMap<Block, IBlockState> anyStateMap = FluidInteractiveAccessor.anyState.get(fluidBlock);
         if(collisionMap==null || anyStateMap==null) return recipes;
 
         Set<Block> blocks = new HashSet<>(anyStateMap.keySet());
