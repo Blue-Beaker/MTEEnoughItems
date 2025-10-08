@@ -5,23 +5,31 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BlockTooltipCallbacks {
-    Map<Integer, IBlockState> blockStates = new HashMap<>();
+    Map<Integer, Set<IBlockState>> blockStates = new HashMap<>();
     public BlockTooltipCallbacks(){
     }
     public BlockTooltipCallbacks add(int i, IBlockState state){
-        blockStates.put(i,state);
+        if(!blockStates.containsKey(i)){
+            blockStates.put(i,new HashSet<>());
+        }
+        blockStates.get(i).add(state);
         return this;
     }
+
     public void onTooltip(int i, List<String> list){
-        IBlockState state = blockStates.get(i);
-        if(state!=null){
-            list.add(state.toString());
+        Set<IBlockState> states = blockStates.get(i);
+        if(states!=null){
+            states.forEach((b)->{
+                addBlockStrToList(list, b);
+            });
         }
+    }
+
+    public static void addBlockStrToList(List<String> list, IBlockState b) {
+        list.add(b.toString());
     }
 
     public ITooltipCallback<ItemStack> getItemCallback(){

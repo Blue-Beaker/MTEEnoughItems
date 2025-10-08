@@ -8,6 +8,7 @@ import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.Constants;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.accessors.TapperAccessor;
+import io.bluebeaker.mteenoughitems.jei.utils.BlockTooltipCallbacks;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import io.bluebeaker.mteenoughitems.utils.thermal.ThermalUtils;
 import io.bluebeaker.mteenoughitems.utils.world.BlockDropChecker;
@@ -20,6 +21,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -49,8 +51,15 @@ public class TreeFluidCategory extends GenericRecipeCategory<TreeFluidCategory.W
         this.addItemSlot(itemStacks,1,16, slotY-18);
         itemStacks.set(1,wrapper.inputLeaves);
 
-        this.addFluidSlot(fluidStacks,1,GUI_WIDTH-34, slotY);
-        fluidStacks.set(1,new FluidStack(wrapper.outputFluid,1000));
+        this.addFluidSlot(fluidStacks,2,GUI_WIDTH-34, slotY);
+        fluidStacks.set(2,new FluidStack(wrapper.outputFluid,1000));
+
+        BlockTooltipCallbacks callbacks = new BlockTooltipCallbacks().add(0,wrapper.logBlock);
+        for (IBlockState leavesBlock : wrapper.leavesBlocks) {
+            callbacks.add(1,leavesBlock);
+        }
+        itemStacks.addTooltipCallback(callbacks.getItemCallback());
+        fluidStacks.addTooltipCallback(callbacks.getFluidCallback());
     }
 
     @Override
@@ -80,10 +89,10 @@ public class TreeFluidCategory extends GenericRecipeCategory<TreeFluidCategory.W
         if(blockWrapperFluidStackMap!=null){
             for (Map.Entry<BlockWrapper, FluidStack> entry : blockWrapperFluidStackMap.entrySet()) {
                 BlockWrapper key = entry.getKey();
-                Set<BlockWrapper> leaf = TapperManager.getLeaf(key.block.getStateFromMeta(key.metadata));
+                Set<BlockWrapper> leaves = TapperManager.getLeaf(key.block.getStateFromMeta(key.metadata));
                 FluidStack output = entry.getValue();
 
-                recipes.add(new Wrapper(key,leaf,output));
+                recipes.add(new Wrapper(key,leaves,output));
             }
         }
 
@@ -91,15 +100,20 @@ public class TreeFluidCategory extends GenericRecipeCategory<TreeFluidCategory.W
     }
 
     public static class Wrapper implements IRecipeWrapper {
+        public final IBlockState logBlock;
+        public final List<IBlockState> leavesBlocks = new ArrayList<>();
         public final ItemStack inputLog;
         public final List<ItemStack> inputLeaves = new ArrayList<>();
         public final FluidStack outputFluid;
         public Wrapper(BlockWrapper log, Set<BlockWrapper> leaves, FluidStack output) {
             super();
-            inputLog = BlockDropChecker.getDrop(ThermalUtils.getBlockstateFromWrapper(log));
+            logBlock=ThermalUtils.getBlockstateFromWrapper(log);
             leaves.forEach((b)->{
-                inputLeaves.add(BlockDropChecker.getDrop(ThermalUtils.getBlockstateFromWrapper(b)));
+                IBlockState state = ThermalUtils.getBlockstateFromWrapper(b);
+                leavesBlocks.add(state);
+                inputLeaves.add(BlockDropChecker.getDrop(state));
             });
+            inputLog = BlockDropChecker.getDrop(logBlock);
             this.outputFluid = output;
         }
 
