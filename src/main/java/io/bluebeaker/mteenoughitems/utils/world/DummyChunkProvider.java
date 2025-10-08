@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class DummyChunkProvider implements IChunkProvider {
     private final DummyWorld world;
-    public final Map<ChunkPos, Chunk> chunks = new HashMap<>();
+    public final Map<Long, Chunk> chunks = new HashMap<>();
 
     public DummyChunkProvider(DummyWorld world){
         this.world=world;
@@ -22,13 +22,12 @@ public class DummyChunkProvider implements IChunkProvider {
     @Nullable
     @Override
     public Chunk getLoadedChunk(int x, int z) {
-        ChunkPos chunkPos = new ChunkPos(x, z);
-        return chunks.get(chunkPos);
+        return chunks.get(ChunkPos.asLong(x,z));
     }
 
     @Override
     public Chunk provideChunk(int x, int z) {
-        ChunkPos chunkPos = new ChunkPos(x, z);
+        long chunkPos = ChunkPos.asLong(x,z);
         if (!chunks.containsKey(chunkPos)) {
             chunks.put(chunkPos, new DummyChunk(world, x, z));
         }
@@ -56,7 +55,7 @@ public class DummyChunkProvider implements IChunkProvider {
 
     @Override
     public boolean isChunkGeneratedAt(int x, int z) {
-        return chunks.containsKey(new ChunkPos(x, z));
+        return chunks.containsKey(ChunkPos.asLong(x, z));
     }
 
     public void clear() {

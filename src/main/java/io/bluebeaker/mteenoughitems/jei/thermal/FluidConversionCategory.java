@@ -8,8 +8,8 @@ import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.accessors.FluidInteractiveAccessor;
 import io.bluebeaker.mteenoughitems.jei.utils.BlockTooltipCallbacks;
 import io.bluebeaker.mteenoughitems.utils.Area2i;
-import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
+import io.bluebeaker.mteenoughitems.utils.BlockDropChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -171,8 +171,8 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
             inputFluid = FluidRegistry.lookupFluidForBlock(inputBlock);
             outputFluid = FluidRegistry.lookupFluidForBlock(outputBlock);
             
-            inputItem = inItem!=null?inItem: ItemUtils.getItemstackFromBlockState(input);
-            outputItem = outItem!=null?outItem: ItemUtils.getItemstackFromBlockState(output);
+            inputItem = inItem!=null?inItem: BlockDropChecker.getDrop(input);
+            outputItem = outItem!=null?outItem: BlockDropChecker.getDrop(output);
         }
 
         @Override

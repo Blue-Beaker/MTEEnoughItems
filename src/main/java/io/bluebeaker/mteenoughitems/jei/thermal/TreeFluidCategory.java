@@ -11,7 +11,7 @@ import io.bluebeaker.mteenoughitems.jei.thermal.accessors.TapperAccessor;
 import io.bluebeaker.mteenoughitems.jei.utils.BlockTooltipCallbacks;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import io.bluebeaker.mteenoughitems.utils.thermal.ThermalUtils;
-import io.bluebeaker.mteenoughitems.utils.world.BlockDropChecker;
+import io.bluebeaker.mteenoughitems.utils.BlockDropChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableStatic;
