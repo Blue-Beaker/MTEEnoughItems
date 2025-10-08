@@ -30,6 +30,11 @@ public class Categories {
         
         public static final String TREE_EXTRACTOR_UID = "mteenoughitems.thermal.tree_extractor";
         public static final String TREE_EXTRACTOR = "category."+TREE_EXTRACTOR_UID+".name";
+
+        public static final String TREE_EXTRACTOR_FUEL_UID = "mteenoughitems.thermal.tree_extractor_fuel";
+        public static final String TREE_EXTRACTOR_FUEL = "category."+TREE_EXTRACTOR_FUEL_UID+".name";
+
+
     }
     public static class BuildCraft{
         public static final String FACADE_ASSEMBLY_UID="mteenoughitems.buildcraft.facade_assembly";

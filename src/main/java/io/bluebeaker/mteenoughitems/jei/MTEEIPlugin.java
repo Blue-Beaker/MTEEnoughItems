@@ -15,6 +15,7 @@ import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.WorldSpikeFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.FluidConversionCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.TreeFluidCategory;
+import io.bluebeaker.mteenoughitems.jei.thermal.TreeFluidFuelCategory;
 import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.LogTimer;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
@@ -71,6 +72,7 @@ public class MTEEIPlugin implements IModPlugin {
     }
     if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
       registry.addRecipeCategories(new TreeFluidCategory(guiHelper));
+      registry.addRecipeCategories(new TreeFluidFuelCategory(guiHelper));
     }
   }
 
@@ -120,16 +122,9 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_firebox_solid"), BoilerCategory.UID);
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "locomotive_steam_solid"), BoilerCategory.UID);
 
-//      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_SOLID.item(), registry, BoilerCategory.UID);
-//      addItemCatalystIfNotNull(RailcraftCarts.LOCO_STEAM_SOLID.getItem(), registry, BoilerCategory.UID);
-
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_firebox_fluid"),FluidFireboxCategory.UID, BoilerCategory.UID);
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_tank_pressure_high"),FluidFireboxCategory.UID, BoilerCategory.UID);
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.Railcraft.name, "boiler_tank_pressure_low"),FluidFireboxCategory.UID, BoilerCategory.UID);
-
-//      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_FIREBOX_FLUID.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
-//      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_HIGH.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
-//      addItemCatalystIfNotNull(RailcraftBlocks.BOILER_TANK_PRESSURE_LOW.item(), registry, FluidFireboxCategory.UID,BoilerCategory.UID);
 
       if(MTEEnoughItemsConfig.railcraft.fluid_firebox){
         registry.addRecipes(FluidFireboxCategory.getRecipes(jeiHelpers), FluidFireboxCategory.UID);
@@ -153,8 +148,11 @@ public class MTEEIPlugin implements IModPlugin {
     }
     if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
       registry.addRecipes(TreeFluidCategory.getRecipes(jeiHelpers), TreeFluidCategory.UID);
-      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ThermalExpansion.name, "device",3),TreeFluidCategory.UID);
-      registry.addRecipeClickArea(GuiTapper.class,62,35,16,16,TreeFluidCategory.UID);
+      registry.addRecipes(TreeFluidFuelCategory.getRecipes(jeiHelpers), TreeFluidFuelCategory.UID);
+
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ThermalExpansion.name, "device",3),TreeFluidCategory.UID,TreeFluidFuelCategory.UID);
+      registry.addRecipeClickArea(GuiTapper.class,62,35,16,16,TreeFluidCategory.UID,TreeFluidFuelCategory.UID);
+
       MTEEnoughItems.getLogger().info("Loaded Thermal Expansion recipes in {}ms",timer.stagedTime());
     }
   }
