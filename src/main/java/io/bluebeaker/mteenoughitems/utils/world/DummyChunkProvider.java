@@ -28,10 +28,12 @@ public class DummyChunkProvider implements IChunkProvider {
     @Override
     public Chunk provideChunk(int x, int z) {
         long chunkPos = ChunkPos.asLong(x,z);
-        if (!chunks.containsKey(chunkPos)) {
-            chunks.put(chunkPos, new DummyChunk(world, x, z));
+        Chunk chunk = chunks.get(chunkPos);
+        if (chunk==null) {
+            chunk = new DummyChunk(world, x, z);
+            chunks.put(chunkPos, chunk);
         }
-        return chunks.get(chunkPos);
+        return chunk;
     }
 
     @Override
