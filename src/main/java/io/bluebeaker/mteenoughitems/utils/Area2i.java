@@ -16,4 +16,11 @@ public class Area2i {
     public boolean isInBounds(int x, int y){
         return x>=x1 && y>=y1 && x<x2 && y<y2;
     }
+
+    public int getWidth(){
+        return x2-x1;
+    }
+    public int getHeight(){
+        return y2-y1;
+    }
 }

@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -40,8 +41,13 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
     public static final String UID = Categories.Thermal.FLUID_CONVERSION_UID;
     protected final IDrawableStatic bgArrow;
 
+    public static final Rectangle SIZE = new Rectangle(0,0,116,32);
+
+    public static final Area2i SLOT_INPUT = new Area2i(32,SIZE.height / 2 - 9,18,18);
+    public static final Area2i SLOT_OUTPUT = new Area2i(SIZE.width-26,SIZE.height / 2 - 9,18,18);
+
     public FluidConversionCategory(IGuiHelper guiHelper) {
-        super(guiHelper,116,32);
+        super(guiHelper,SIZE.width,SIZE.height);
         this.bgArrow = guiHelper.createDrawable(Constants.GUI_0, 0, 0, 24, 17);
         this.icon = guiHelper.createDrawableIngredient(FluidUtil.getFilledBucket(new FluidStack(TFFluids.fluidMana,1000)));
     }
@@ -56,18 +62,18 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
         fluidStacks.set(0,new FluidStack(wrapper.fluid,1000));
 
         if(wrapper.inputFluid!=null){
-            this.addFluidSlot(fluidStacks,1,32, slotY);
+            this.addFluidSlot(fluidStacks,1, SLOT_INPUT.x1,SLOT_INPUT.y1);
             fluidStacks.set(1,new FluidStack(wrapper.inputFluid,1000));
         }else {
-            this.addItemSlot(itemStacks,1,32, slotY);
+            this.addItemSlot(itemStacks,1,SLOT_INPUT.x1,SLOT_INPUT.y1);
             itemStacks.set(1,wrapper.inputItem);
         }
 
         if(wrapper.outputFluid!=null){
-            this.addFluidSlot(fluidStacks,2,GUI_WIDTH-26, slotY);
+            this.addFluidSlot(fluidStacks,2,SLOT_OUTPUT.x1, SLOT_OUTPUT.y1);
             fluidStacks.set(2,new FluidStack(wrapper.outputFluid,1000));
         }else {
-            this.addItemSlot(itemStacks,2,GUI_WIDTH-26, slotY);
+            this.addItemSlot(itemStacks,2,SLOT_OUTPUT.x1, SLOT_OUTPUT.y1);
             itemStacks.set(2,wrapper.outputItem);
         }
     }
@@ -191,8 +197,7 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
         @Override
         public List<String> getTooltipStrings(int mouseX, int mouseY) {
             if(this.outputFluid!=null || !this.outputItem.isEmpty()) return Collections.emptyList();
-            Area2i area2i = new Area2i(90, 7, 18, 18);
-            if(area2i.isInBounds(mouseX,mouseY)){
+            if(SLOT_OUTPUT.isInBounds(mouseX,mouseY)){
                 List<String> tip = new ArrayList<>();
                 tip.add(outputState.getBlock().getLocalizedName());
                 tip.add(outputState.toString());
