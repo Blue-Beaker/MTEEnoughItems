@@ -1,5 +1,6 @@
 package io.bluebeaker.mteenoughitems.jei;
 
+import cofh.thermalexpansion.gui.client.device.GuiTapper;
 import forestry.energy.gui.GuiEngineBiogas;
 import forestry.energy.gui.GuiEnginePeat;
 import forestry.energy.gui.GuiGenerator;
@@ -153,6 +154,7 @@ public class MTEEIPlugin implements IModPlugin {
     if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
       registry.addRecipes(TreeFluidCategory.getRecipes(jeiHelpers), TreeFluidCategory.UID);
       registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ThermalExpansion.name, "device",3),TreeFluidCategory.UID);
+      registry.addRecipeClickArea(GuiTapper.class,62,35,16,16,TreeFluidCategory.UID);
       MTEEnoughItems.getLogger().info("Loaded Thermal Expansion recipes in {}ms",timer.stagedTime());
     }
   }
