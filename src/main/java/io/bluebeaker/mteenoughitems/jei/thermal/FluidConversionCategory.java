@@ -6,6 +6,7 @@ import io.bluebeaker.mteenoughitems.Categories;
 import io.bluebeaker.mteenoughitems.Constants;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.accessors.FluidInteractiveAccessor;
+import io.bluebeaker.mteenoughitems.jei.utils.BlockTooltipCallbacks;
 import io.bluebeaker.mteenoughitems.utils.Area2i;
 import io.bluebeaker.mteenoughitems.utils.ItemUtils;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
@@ -76,6 +77,10 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
             this.addItemSlot(itemStacks,2,SLOT_OUTPUT.x1, SLOT_OUTPUT.y1);
             itemStacks.set(2,wrapper.outputItem);
         }
+
+        BlockTooltipCallbacks callbacks = new BlockTooltipCallbacks().add(1,wrapper.inputState).add(2,wrapper.outputState);
+        itemStacks.addTooltipCallback(callbacks.getItemCallback());
+        fluidStacks.addTooltipCallback(callbacks.getFluidCallback());
     }
 
     @Override
@@ -185,6 +190,8 @@ public class FluidConversionCategory extends GenericRecipeCategory<FluidConversi
             }else {
                 iIngredients.setOutput(VanillaTypes.ITEM,outputItem);
             }
+
+
         }
 
         @Override
