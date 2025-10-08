@@ -38,6 +38,11 @@ public class BioGeneratorCategory extends FluidPowerRecipeCategory<BioGeneratorC
     }
 
     @Override
+    public String getTitle() {
+        return PluginIC2.getBlocks().generator.getLocalizedName();
+    }
+
+    @Override
     public String getUid() {
         return UID;
     }

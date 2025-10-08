@@ -71,6 +71,11 @@ public class BiogasEngineCategory extends FluidPowerRecipeCategory<BiogasEngineC
     }
 
     @Override
+    public String getTitle() {
+        return ModuleEnergy.getBlocks().biogasEngine.getLocalizedName();
+    }
+
+    @Override
     public String getUid() {
         return UID;
     }

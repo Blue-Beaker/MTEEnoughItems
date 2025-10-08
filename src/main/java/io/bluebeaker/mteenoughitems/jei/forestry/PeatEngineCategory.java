@@ -19,7 +19,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -65,6 +64,10 @@ public class PeatEngineCategory extends GenericRecipeCategory<PeatEngineCategory
     @Override
     public String getTranslationKey() {
         return Categories.Forestry.PEAT_ENGINE;
+    }
+    @Override
+    public String getTitle() {
+        return ModuleEnergy.getBlocks().peatEngine.getLocalizedName();
     }
 
     @Override

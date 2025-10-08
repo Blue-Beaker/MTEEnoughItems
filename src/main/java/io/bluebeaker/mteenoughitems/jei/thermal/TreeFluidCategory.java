@@ -9,9 +9,9 @@ import io.bluebeaker.mteenoughitems.Constants;
 import io.bluebeaker.mteenoughitems.jei.generic.GenericRecipeCategory;
 import io.bluebeaker.mteenoughitems.jei.thermal.accessors.TapperAccessor;
 import io.bluebeaker.mteenoughitems.jei.utils.BlockTooltipCallbacks;
+import io.bluebeaker.mteenoughitems.utils.BlockDropChecker;
 import io.bluebeaker.mteenoughitems.utils.ModChecker;
 import io.bluebeaker.mteenoughitems.utils.thermal.ThermalUtils;
-import io.bluebeaker.mteenoughitems.utils.BlockDropChecker;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -70,6 +70,10 @@ public class TreeFluidCategory extends GenericRecipeCategory<TreeFluidCategory.W
     @Override
     public String getTranslationKey() {
         return Categories.Thermal.TREE_EXTRACTOR;
+    }
+    @Override
+    public String getTitle() {
+        return BlockDevice.deviceTapper.getDisplayName();
     }
 
     @Override
