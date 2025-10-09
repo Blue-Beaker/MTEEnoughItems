@@ -40,4 +40,8 @@ public class Categories {
         public static final String FACADE_ASSEMBLY_UID="mteenoughitems.buildcraft.facade_assembly";
         public static final String FACADE_ASSEMBLY="category."+FACADE_ASSEMBLY_UID+".name";
     }
+    public static class ImmersiveEngineering{
+        public static final String DIESEL_GENERATOR_UID="mteenoughitems.immersiveengineering.diesel_generator";
+        public static final String DIESEL_GENERATOR="category."+DIESEL_GENERATOR_UID+".name";
+    }
 }

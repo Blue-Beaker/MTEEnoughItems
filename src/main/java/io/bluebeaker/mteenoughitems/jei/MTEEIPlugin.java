@@ -9,6 +9,7 @@ import io.bluebeaker.mteenoughitems.MTEEnoughItemsConfig;
 import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
+import io.bluebeaker.mteenoughitems.jei.immersiveengineering.DieselGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BlastFurnaceFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
@@ -73,6 +74,9 @@ public class MTEEIPlugin implements IModPlugin {
     if(ModChecker.ThermalExpansion.isLoaded() && MTEEnoughItemsConfig.thermal.tree_extractor){
       registry.addRecipeCategories(new TreeFluidCategory(guiHelper));
       registry.addRecipeCategories(new TreeFluidFuelCategory(guiHelper));
+    }
+    if(ModChecker.ImmersiveEngineering.isLoaded() && MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
+      registry.addRecipeCategories(new DieselGeneratorCategory(guiHelper));
     }
   }
 
@@ -154,6 +158,12 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipeClickArea(GuiTapper.class,62,35,16,16,TreeFluidCategory.UID,TreeFluidFuelCategory.UID);
 
       MTEEnoughItems.getLogger().info("Loaded Thermal Expansion recipes in {}ms",timer.stagedTime());
+    }
+
+    if(ModChecker.ImmersiveEngineering.isLoaded() && MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
+      registry.addRecipes(DieselGeneratorCategory.getRecipes(jeiHelpers),DieselGeneratorCategory.UID);
+      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_multiblock",10),DieselGeneratorCategory.UID);
+      MTEEnoughItems.getLogger().info("Loaded Immersive Engineering recipes in {}ms",timer.stagedTime());
     }
   }
 

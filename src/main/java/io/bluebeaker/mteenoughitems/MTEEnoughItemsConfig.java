@@ -45,6 +45,13 @@ public class MTEEnoughItemsConfig {
         @LangKey(Categories.Thermal.TREE_EXTRACTOR)
         public boolean tree_extractor = true;
     }
+    @LangKey("config.mteenoughitems.immersiveEngineering.name")
+    public static ImmersiveEngineering immersiveEngineering = new ImmersiveEngineering();
+    public static class ImmersiveEngineering{
+        @Config.RequiresMcRestart
+        @LangKey(Categories.ImmersiveEngineering.DIESEL_GENERATOR)
+        public boolean diesel_generator = true;
+    }
     @LangKey("config.mteenoughitems.buildcraft.name")
     public static Buildcraft buildcraft = new Buildcraft();
     public static class Buildcraft{
