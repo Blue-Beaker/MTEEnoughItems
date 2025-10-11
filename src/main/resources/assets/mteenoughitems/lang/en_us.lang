@@ -18,3 +18,4 @@ category.mteenoughitems.immersiveengineering.mineral_deposit.name=Mineral Deposi
 category.mteenoughitems.immersiveengineering.mineral_deposit.weight=Weight %s
 category.mteenoughitems.immersiveengineering.mineral_deposit.whitelist=Whitelist dims: %s
 category.mteenoughitems.immersiveengineering.mineral_deposit.blacklist=Blacklist dims: %s
+category.mteenoughitems.immersiveengineering.mineral_deposit.count=Avg. %s per vein

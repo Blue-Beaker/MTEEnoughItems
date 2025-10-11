@@ -114,21 +114,24 @@ public class MineralDepositCategory extends GenericRecipeCategory<MineralDeposit
         @Override
         public List<String> getTooltipStrings(int mouseX, int mouseY) {
             // Show mineral name
-            if(mouseY>=2 && mouseY<=11 && mouseX>=MARGIN_X && mouseX<=MARGIN_X+Minecraft.getMinecraft().fontRenderer.getStringWidth(getOreName(mineralMix.name))) return Collections.singletonList(mineralMix.name);
+            if(mouseY>=2 && mouseY<=11 && mouseX>=MARGIN_X && mouseX<170-MARGIN_X && mouseX<=MARGIN_X+Minecraft.getMinecraft().fontRenderer.getStringWidth(getOreName(mineralMix.name))) return Collections.singletonList(mineralMix.name);
             // Show dimension list
-            if(mouseY<12 || mouseY>21 || mouseX<MARGIN_X || mouseX>170-MARGIN_X) return Collections.emptyList();
-            int[] dimList;
-            if(mineralMix.dimensionWhitelist.length>0) dimList=mineralMix.dimensionWhitelist;
-            else if(mineralMix.dimensionBlacklist.length>0) dimList=mineralMix.dimensionBlacklist;
-            else return Collections.emptyList();
+            if (mouseY >= 12 && mouseY <= 21 && mouseX >= MARGIN_X && mouseX <= 170 - MARGIN_X) {
+                int[] dimList;
+                if (mineralMix.dimensionWhitelist.length > 0) dimList = mineralMix.dimensionWhitelist;
+                else if (mineralMix.dimensionBlacklist.length > 0) dimList = mineralMix.dimensionBlacklist;
+                else return Collections.emptyList();
 
-            if(mouseX>MARGIN_X+Minecraft.getMinecraft().fontRenderer.getStringWidth(getDimListStr())) return Collections.emptyList();
+                if (mouseX > MARGIN_X + Minecraft.getMinecraft().fontRenderer.getStringWidth(getDimListStr()))
+                    return Collections.emptyList();
 
-            List<String> lines = new ArrayList<>();
-            for (int i : dimList) {
-                lines.add(StringUtils.getDimensionName(i));
+                List<String> lines = new ArrayList<>();
+                for (int i : dimList) {
+                    lines.add(StringUtils.getDimensionName(i));
+                }
+                return lines;
             }
-            return lines;
+            return Collections.emptyList();
         }
     }
     public static class TooltipCallback implements ITooltipCallback<ItemStack>{
@@ -143,6 +146,7 @@ public class MineralDepositCategory extends GenericRecipeCategory<MineralDeposit
             float[] chances = wrapper.mineralMix.recalculatedChances;
             if(i>=chances.length) return;
             list.add(String.format("%.2f%%",chances[i]*100));
+            list.add(I18n.format("category.mteenoughitems.immersiveengineering.mineral_deposit.count",String.format("%.1f",chances[i]*ExcavatorHandler.mineralVeinCapacity)));
         }
     }
 }
