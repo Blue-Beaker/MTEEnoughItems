@@ -51,6 +51,9 @@ public class MTEEnoughItemsConfig {
         @Config.RequiresMcRestart
         @LangKey(Categories.ImmersiveEngineering.DIESEL_GENERATOR)
         public boolean diesel_generator = true;
+        @Config.RequiresMcRestart
+        @LangKey(Categories.ImmersiveEngineering.MINERAL_DEPOSIT)
+        public boolean mineral_deposit = true;
     }
     @LangKey("config.mteenoughitems.buildcraft.name")
     public static Buildcraft buildcraft = new Buildcraft();

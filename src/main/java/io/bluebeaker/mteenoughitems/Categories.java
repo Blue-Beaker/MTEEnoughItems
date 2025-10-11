@@ -43,5 +43,7 @@ public class Categories {
     public static class ImmersiveEngineering{
         public static final String DIESEL_GENERATOR_UID="mteenoughitems.immersiveengineering.diesel_generator";
         public static final String DIESEL_GENERATOR="category."+DIESEL_GENERATOR_UID+".name";
+        public static final String MINERAL_DEPOSIT_UID="mteenoughitems.immersiveengineering.mineral_deposit";
+        public static final String MINERAL_DEPOSIT="category."+MINERAL_DEPOSIT_UID+".name";
     }
 }

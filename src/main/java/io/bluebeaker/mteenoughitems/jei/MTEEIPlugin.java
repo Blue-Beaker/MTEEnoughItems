@@ -10,6 +10,7 @@ import io.bluebeaker.mteenoughitems.jei.forestry.BioGeneratorCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.BiogasEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.forestry.PeatEngineCategory;
 import io.bluebeaker.mteenoughitems.jei.immersiveengineering.DieselGeneratorCategory;
+import io.bluebeaker.mteenoughitems.jei.immersiveengineering.MineralDepositCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BlastFurnaceFuelCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.BoilerCategory;
 import io.bluebeaker.mteenoughitems.jei.railcraft.FluidFireboxCategory;
@@ -75,8 +76,13 @@ public class MTEEIPlugin implements IModPlugin {
       registry.addRecipeCategories(new TreeFluidCategory(guiHelper));
       registry.addRecipeCategories(new TreeFluidFuelCategory(guiHelper));
     }
-    if(ModChecker.ImmersiveEngineering.isLoaded() && MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
-      registry.addRecipeCategories(new DieselGeneratorCategory(guiHelper));
+    if(ModChecker.ImmersiveEngineering.isLoaded()){
+      if(MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
+        registry.addRecipeCategories(new DieselGeneratorCategory(guiHelper));
+      }
+      if(MTEEnoughItemsConfig.immersiveEngineering.mineral_deposit){
+        registry.addRecipeCategories(new MineralDepositCategory(guiHelper));
+      }
     }
   }
 
@@ -160,9 +166,18 @@ public class MTEEIPlugin implements IModPlugin {
       MTEEnoughItems.getLogger().info("Loaded Thermal Expansion recipes in {}ms",timer.stagedTime());
     }
 
-    if(ModChecker.ImmersiveEngineering.isLoaded() && MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
-      registry.addRecipes(DieselGeneratorCategory.getRecipes(jeiHelpers),DieselGeneratorCategory.UID);
-      registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_multiblock",10),DieselGeneratorCategory.UID);
+    if(ModChecker.ImmersiveEngineering.isLoaded()){
+      if (MTEEnoughItemsConfig.immersiveEngineering.diesel_generator){
+        registry.addRecipes(DieselGeneratorCategory.getRecipes(jeiHelpers),DieselGeneratorCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_multiblock",10),DieselGeneratorCategory.UID);
+      }
+
+      if (MTEEnoughItemsConfig.immersiveEngineering.mineral_deposit){
+        registry.addRecipes(MineralDepositCategory.getRecipes(jeiHelpers),MineralDepositCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_device1",7),MineralDepositCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_multiblock",11),MineralDepositCategory.UID);
+        registry.addRecipeCatalyst(ItemUtils.getItemstack(ModChecker.ImmersiveEngineering.name,"metal_multiblock",12),MineralDepositCategory.UID);
+      }
       MTEEnoughItems.getLogger().info("Loaded Immersive Engineering recipes in {}ms",timer.stagedTime());
     }
   }
