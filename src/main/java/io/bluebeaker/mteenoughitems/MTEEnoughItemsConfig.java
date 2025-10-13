@@ -68,7 +68,7 @@ public class MTEEnoughItemsConfig {
         public boolean facade_assembly = true;
     }
     @LangKey("config.mteenoughitems.storageDrawers.name")
-    public static StorageDrawers storageDrawers;
+    public static StorageDrawers storageDrawers = new StorageDrawers();
     public static class StorageDrawers{
         @Config.RequiresMcRestart
         @Config.Comment("Register ingredient subtypes for Storage Drawers in JEI.")
