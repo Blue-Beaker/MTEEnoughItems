@@ -67,4 +67,12 @@ public class MTEEnoughItemsConfig {
         @LangKey(Categories.BuildCraft.FACADE_ASSEMBLY)
         public boolean facade_assembly = true;
     }
+    @LangKey("config.mteenoughitems.storageDrawers.name")
+    public static StorageDrawers storageDrawers;
+    public static class StorageDrawers{
+        @Config.RequiresMcRestart
+        @Config.Comment("Register ingredient subtypes for Storage Drawers in JEI.")
+        @LangKey("config.mteenoughitems.storagedrawers.drawer_subtypes")
+        public boolean drawer_subtypes = true;
+    }
 }

@@ -19,3 +19,4 @@ category.mteenoughitems.immersiveengineering.mineral_deposit.weight=权重 %s
 category.mteenoughitems.immersiveengineering.mineral_deposit.whitelist=白名单维度: %s
 category.mteenoughitems.immersiveengineering.mineral_deposit.blacklist=黑名单维度: %s
 category.mteenoughitems.immersiveengineering.mineral_deposit.count=平均每矿脉 %s 个
+config.mteenoughitems.storagedrawers.drawer_subtypes=抽屉分类

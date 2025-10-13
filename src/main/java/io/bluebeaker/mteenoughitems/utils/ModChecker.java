@@ -9,6 +9,8 @@ public enum ModChecker {
     Railcraft("railcraft"),
     ThermalFoundation("thermalfoundation"),
     ThermalExpansion("thermalexpansion"),
+    StorageDrawers("storagedrawers"),
+    StorageDrawersExtra("storagedrawersextra"),
     IC2("ic2");
 
     ModChecker(String name){
