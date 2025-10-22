@@ -5,3 +5,5 @@ Initial release
 - Add zh-cn localization  
 ## 1.0.2
 - Add subtype for storage drawers and storage drawers extra
+## 1.0.3
+Rework blockstate-based recipes to use Forge's sensitive version to get item representation for the block
