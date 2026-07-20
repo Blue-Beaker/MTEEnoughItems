@@ -41,15 +41,15 @@ dependencies {
     runtimeOnly 'com.cleanroommc:strip-latest-forge-requirements:1.0'
 
     // For easier testing
-    implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
-    runtimeOnly rfg.deobf('curse.maven:ftb-library-legacy-forge-237167:2985811')
-    runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
+    implementation rfg.deobf('libs:HadEnoughItems_1.12.2-4.25.5')
+    runtimeOnly rfg.deobf('libs:FTBLib-5.4.7.2')
+    runtimeOnly rfg.deobf('libs:FTBUtilities-5.4.1.131')
 
     runtimeOnly rfg.deobf('libs:theoneprobe-1.12-1.4.28')
     runtimeOnly rfg.deobf('libs:WTS-1.1.0')
 
     // Forestry
-    implementation rfg.deobf("curse.maven:forestry-59751:2918418")
+    implementation rfg.deobf("libs:forestry_1.12.2-5.8.2.426")
     implementation rfg.deobf("libs:industrialcraft-2-2.8.222-ex112")
     // Railcraft
     implementation rfg.deobf('libs:railcraft-12.0.0')

@@ -24,6 +24,7 @@ public class MTEEIPlugin implements IModPlugin {
     Forestry(ModChecker.Forestry,ForestryPlugin::new),
     Railcraft(ModChecker.Railcraft,RailcraftPlugin::new),
     BuildcraftSilicon(ModChecker.BuildcraftSilicon,BCSiliconPlugin::new),
+    ImmersiveEngineering(ModChecker.ImmersiveEngineering,ImmersiveEngineeringPlugin::new),
     StorageDrawers(ModChecker.StorageDrawers,StorageDrawersPlugin::new),
 
     ThermalFoundation(ModChecker.ThermalFoundation,ThermalFoundationPlugin::new),
